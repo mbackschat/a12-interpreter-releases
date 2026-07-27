@@ -1,0 +1,39 @@
+{
+    "meta": {
+        "id": "order-phantom-item-row",
+        "kernelVersion": "30.8.1",
+        "source": "curated",
+        "sections": [
+            "§12"
+        ],
+        "tags": [
+            "partial",
+            "phantom-row"
+        ],
+        "notes": "partial validation fires on a relevant row absent from the instance (IF54)"
+    },
+    "modelRef": "models/order-stock-low.json",
+    "placements": [
+        {
+            "kind": "GROUP",
+            "path": "/Order",
+            "reps": [
+                1
+            ]
+        }
+    ],
+    "op": {
+        "kind": "validatePart",
+        "relevant": [
+            {
+                "path": "/Order",
+                "reps": [
+                    1
+                ]
+            }
+        ]
+    },
+    "expected": [
+        "STOCK_LOW|OMISSION_ERROR|/Order[1]/Items[1]/Count"
+    ]
+}

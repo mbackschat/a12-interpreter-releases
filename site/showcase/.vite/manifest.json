@@ -1,0 +1,46 @@
+{
+  "index.html": {
+    "file": "assets/index-FErhphx5.js",
+    "name": "index",
+    "src": "index.html",
+    "isEntry": true,
+    "dynamicImports": [
+      "src/performance.ts",
+      "src/qualification.ts",
+      "src/showcase.ts"
+    ],
+    "css": [
+      "assets/index-ZymJ2iGS.css"
+    ]
+  },
+  "src/performance.ts": {
+    "file": "assets/performance-DgBGZJD9.js",
+    "name": "performance",
+    "src": "src/performance.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html"
+    ]
+  },
+  "src/qualification.ts": {
+    "file": "assets/qualification-Cz01vg1F.js",
+    "name": "qualification",
+    "src": "src/qualification.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html"
+    ]
+  },
+  "src/showcase.ts": {
+    "file": "assets/showcase-BtctrHRe.js",
+    "name": "showcase",
+    "src": "src/showcase.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html"
+    ],
+    "dynamicImports": [
+      "src/performance.ts"
+    ]
+  }
+}

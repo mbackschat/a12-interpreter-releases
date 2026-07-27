@@ -1,0 +1,76 @@
+{
+  "header" : {
+    "id" : "permit-section",
+    "modelType" : "document",
+    "modelVersion" : "28.4.0",
+    "locales" : [ {
+      "code" : "en_US"
+    } ],
+    "labels" : [ ],
+    "annotations" : [ ],
+    "modelReferences" : [ {
+      "alias" : "checksAlias",
+      "modelType" : "document",
+      "purpose" : "include",
+      "reference" : "inspection-checks"
+    } ]
+  },
+  "content" : {
+    "modelInfo" : {
+      "name" : "permit-section",
+      "variant" : "cockpit",
+      "revision" : "Arbeitsversion",
+      "immutable" : false
+    },
+    "modelConfig" : {
+      "decimalSeparator" : ".",
+      "timeZone" : "Europe/Berlin",
+      "conditionLanguage" : {
+        "code" : "en_US"
+      },
+      "fieldRefByShortNameAllowed" : true
+    },
+    "modelRoot" : {
+      "rootGroups" : [ {
+        "type" : "Group",
+        "id" : "/Section",
+        "name" : "Section",
+        "Group" : {
+          "repeatability" : 1,
+          "elements" : [ {
+            "type" : "Field",
+            "id" : "/Section/Name",
+            "name" : "Name",
+            "Field" : {
+              "fieldType" : {
+                "type" : "StringType"
+              }
+            }
+          }, {
+            "type" : "Group",
+            "id" : "/Section/Inspection",
+            "name" : "Inspection",
+            "Group" : {
+              "repeatability" : 1,
+              "modelAlias" : "checksAlias"
+            }
+          }, {
+            "type" : "Rule",
+            "id" : "/Section/NestedInspectionFlag",
+            "name" : "NestedInspectionFlag",
+            "Rule" : {
+              "errorEntityRelPath" : "../Name",
+              "errorCode" : "NESTED_INSPECTION_FLAG",
+              "errorCondition" : "FieldFilled(Name) And FieldFilled(Inspection/Score) And [Inspection/Score] < 0",
+              "severity" : "ERROR",
+              "errorMessage" : [ {
+                "locale" : "en_US",
+                "text" : "The nested inspection needs attention."
+              } ]
+            }
+          } ]
+        }
+      } ]
+    }
+  }
+}

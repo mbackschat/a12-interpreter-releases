@@ -1,0 +1,95 @@
+{
+    "meta": {
+        "id": "compute-cascade-seed",
+        "kernelVersion": "30.8.1",
+        "source": "fuzz-seed",
+        "sections": [
+            "§11"
+        ],
+        "tags": [
+            "compute",
+            "fuzz"
+        ],
+        "seed": 7,
+        "scenario": "compfuzz#3 b=2 c=5",
+        "notes": "a pinned computation-cascade fuzz seed"
+    },
+    "modelRef": "models/calc-cascade.json",
+    "placements": [
+        {
+            "kind": "GROUP",
+            "path": "/Calc",
+            "reps": [
+                1
+            ]
+        },
+        {
+            "kind": "FIELD",
+            "path": "/Calc/B0",
+            "reps": [
+                1,
+                1
+            ],
+            "value": "23"
+        },
+        {
+            "kind": "FIELD",
+            "path": "/Calc/B1",
+            "reps": [
+                1,
+                1
+            ],
+            "value": "10"
+        },
+        {
+            "kind": "EMPTY",
+            "path": "/Calc/C0",
+            "reps": [
+                1,
+                1
+            ]
+        },
+        {
+            "kind": "EMPTY",
+            "path": "/Calc/C1",
+            "reps": [
+                1,
+                1
+            ]
+        },
+        {
+            "kind": "EMPTY",
+            "path": "/Calc/C2",
+            "reps": [
+                1,
+                1
+            ]
+        },
+        {
+            "kind": "EMPTY",
+            "path": "/Calc/C3",
+            "reps": [
+                1,
+                1
+            ]
+        },
+        {
+            "kind": "EMPTY",
+            "path": "/Calc/C4",
+            "reps": [
+                1,
+                1
+            ]
+        }
+    ],
+    "op": {
+        "kind": "compute"
+    },
+    "computeExpected": [
+        "/Calc[1]/C0|VALUE|23",
+        "/Calc[1]/C1|VALUE|-23",
+        "/Calc[1]/C2|VALUE|-18",
+        "/Calc[1]/C3|VALUE|-547",
+        "/Calc[1]/C4|VALUE|-551"
+    ]
+}

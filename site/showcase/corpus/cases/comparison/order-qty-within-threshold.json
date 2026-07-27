@@ -1,0 +1,37 @@
+{
+    "meta": {
+        "id": "order-qty-within-threshold",
+        "kernelVersion": "30.8.1",
+        "source": "curated",
+        "sections": [
+            "§5"
+        ],
+        "tags": [
+            "comparison"
+        ],
+        "notes": "nothing fires — an empty expected multiset is a real assertion"
+    },
+    "modelRef": "models/order-qty-low.json",
+    "placements": [
+        {
+            "kind": "GROUP",
+            "path": "/Order",
+            "reps": [
+                1
+            ]
+        },
+        {
+            "kind": "FIELD",
+            "path": "/Order/Quantity",
+            "reps": [
+                1,
+                1
+            ],
+            "value": "20"
+        }
+    ],
+    "op": {
+        "kind": "validateFull"
+    },
+    "expected": []
+}

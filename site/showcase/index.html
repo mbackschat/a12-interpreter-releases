@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+      name="description"
+      content="Prepare A12 model workspaces and run validation and computation in your browser."
+    >
+    <title>A12 Interpreter Playground</title>
+    <script type="module" crossorigin src="/a12-interpreter-releases/showcase/assets/index-FErhphx5.js"></script>
+    <link rel="stylesheet" crossorigin href="/a12-interpreter-releases/showcase/assets/index-ZymJ2iGS.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="A12 Interpreter Playground home">
+        <span class="brand-mark" aria-hidden="true">A12</span>
+        <span>Interpreter Playground</span>
+      </a>
+      <div class="package-badge">
+        <span>Package</span>
+        <code>@mbackschat/a12-interpreter</code>
+        <strong
+          id="package-version"
+          data-package="@mbackschat/a12-interpreter"
+        >…</strong>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <p class="eyebrow">Kotlin Multiplatform · TypeScript · browser-native</p>
+        <h1 id="hero-title">Run an A12 document model without a server round-trip.</h1>
+        <p class="hero-copy">
+          A standalone interpreter for A12 document models in browser, Node.js, and JVM applications.
+        </p>
+        <div class="hero-details">
+          <p>
+            <span class="detail-marker" aria-hidden="true">&gt;</span>
+            <span>Use a built-in example or load your own workspace and Document.</span>
+          </p>
+          <p>
+            <span class="detail-marker" aria-hidden="true">&gt;</span>
+            <span>Run full or partial validation and computations without uploading your files.</span>
+          </p>
+        </div>
+        <div class="performance-evidence" aria-label="Performance and bundle size">
+          <div class="performance-results">
+            <p>
+              <strong>Representative:</strong>
+              200 group rows · 23.1 kB · no findings · 10.2 ms median ·
+              <strong><output id="live-performance">measuring…</output> this browser</strong>.
+            </p>
+            <p><strong>Stress:</strong> 10,000 rows · 2.01 MB · 4,900 findings · 177.1 ms median.</p>
+            <p>
+              <strong id="bundle-size">…</strong>
+              interpreter JS bundle (<output id="bundle-size-uncompressed">…</output> minified).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="playground" aria-labelledby="playground-title">
+        <div class="section-heading">
+          <h2 id="playground-title">Try the interpreter</h2>
+          <output id="status" data-state="running" aria-live="polite">Loading the packed interpreter…</output>
+        </div>
+
+        <div class="example-picker">
+          <label>
+            Demo document
+            <select id="scenario">
+              <option value="clean">Valid permit</option>
+              <option value="firing">Permit that fires a rule</option>
+              <option value="formal-invalid">Permit with an invalid number</option>
+              <option value="computation">Permit computation input</option>
+              <option value="include-typedef">Included model + typedef input</option>
+            </select>
+          </label>
+          <p>Each choice loads a Document and its matching model workspace. <span id="scenario-note">The valid permit should produce no findings.</span></p>
+        </div>
+
+        <div class="advanced-controls">
+          <details class="workspace-controls">
+            <summary>Workspace loading</summary>
+            <div class="details-body">
+              <label>
+                Loading mode
+                <select id="workspace-mode">
+                  <option value="file-map">Finite file map</option>
+                  <option value="provider">On-demand provider</option>
+                </select>
+              </label>
+              <p>Finite file map supplies all selected models together. On-demand provider loads only the include and typedef closure discovered from the entry model.</p>
+            </div>
+          </details>
+          <details class="failure-controls">
+            <summary>Test provider failures</summary>
+            <div class="details-body">
+              <label>
+                Failure simulation
+                <select id="provider-failure">
+                  <option value="none">None</option>
+                  <option value="integrity-mismatch">Integrity mismatch</option>
+                  <option value="source-too-large">Source limit</option>
+                  <option value="cancelled">Cancellation after first source</option>
+                </select>
+              </label>
+              <p>Choosing a failure uses On-demand provider mode and shows the structured provider diagnostic.</p>
+            </div>
+          </details>
+          <details class="offline-controls">
+            <summary>Offline use</summary>
+            <div class="details-body">
+              <p>Disabled by default. Enabling offline use stores only the built-in showcase files in this browser. It does not store files you select.</p>
+              <button id="enable-offline" type="button">Enable offline use</button>
+            </div>
+          </details>
+        </div>
+
+        <div class="actions" aria-label="Interpreter operations">
+          <button id="validate" class="primary" type="button">Validate</button>
+          <button id="compute" type="button">Compute</button>
+          <button id="prepare" type="button">Prepare workspace</button>
+          <label class="operation-runs-control">
+            Runs
+            <input
+              id="operation-runs"
+              type="number"
+              min="1"
+              max="100000"
+              step="1"
+              value="1"
+              inputmode="numeric"
+            >
+          </label>
+          <label class="validation-scope-control">
+            Validation scope
+            <select id="validation-scope">
+              <option value="full">Full document</option>
+              <option value="relevant">Relevant scenario group</option>
+            </select>
+          </label>
+          <div id="relevant-selection" class="relevant-selection" hidden>
+            <label>
+              Relevant model path
+              <input id="relevant-path" type="text" value="/Permit">
+            </label>
+            <label>
+              Coordinates JSON
+              <input id="relevant-coordinates" type="text" value="[1]">
+            </label>
+          </div>
+        </div>
+
+        <div class="workbench">
+          <section class="editor-panel" aria-labelledby="document-title">
+            <div class="panel-heading">
+              <h3 id="document-title">Document</h3>
+            </div>
+            <label class="editor-label" for="document-input">Document JSON</label>
+            <p class="editor-help">This editable JSON is the Document passed to Validate or Compute. Choosing a demo Document or loading a Document file replaces it.</p>
+            <textarea id="document-input" spellcheck="false"></textarea>
+            <h4>Use your own files</h4>
+            <p class="upload-intro">
+              The demo needs no files. To use your own data, load a model workspace, a Document, or both.
+            </p>
+            <p class="workspace-help">
+              A workspace can contain included models and imported typedefs. Select the folder—or all related model files—so the interpreter can resolve them locally.
+            </p>
+            <div class="upload-row">
+              <label class="file-button">
+                <input
+                  id="workspace-folder-upload"
+                  type="file"
+                  webkitdirectory
+                  multiple
+                >
+                <span class="file-button-label">Load workspace folder</span>
+              </label>
+              <label class="file-button">
+                <input
+                  id="workspace-upload"
+                  type="file"
+                  accept=".json,.dm.json,application/json"
+                  multiple
+                >
+                <span class="file-button-label">Choose model files</span>
+              </label>
+              <label class="file-button">
+                <input
+                  id="document-upload"
+                  type="file"
+                  accept=".json,application/json"
+                >
+                <span class="file-button-label">Load Document</span>
+              </label>
+            </div>
+            <label id="entry-model-control" hidden>
+              Entry model
+              <select id="entry-model-select" disabled>
+                <option>Loaded workspace entry</option>
+              </select>
+            </label>
+            <nav class="example-downloads" aria-label="Download demo inputs">
+              <span><strong>No download is needed.</strong> The demo is already loaded. Its source files are available to inspect or reuse:</span>
+              <a href="examples/documents/permit-valid.json" download>valid document</a>
+              <a href="examples/documents/permit-formal-invalid.json" download>invalid document</a>
+              <a href="models/permit-basic.dm.json" download>model</a>
+              <a href="showcase-manifest.json" download>workspace manifest</a>
+            </nav>
+          </section>
+
+          <section class="result-panel" aria-labelledby="result-title">
+            <div class="panel-heading">
+              <h3 id="result-title">Result</h3>
+              <span>Selected files stay in this browser.</span>
+            </div>
+            <div id="result-summary" class="result-summary" aria-live="polite">
+              Ready for an operation.
+            </div>
+            <output
+              id="operation-timing"
+              class="operation-timing"
+              aria-live="polite"
+              hidden
+            ></output>
+            <pre id="result" tabindex="0"><code>{
+  "ready": true
+}</code></pre>
+          </section>
+        </div>
+
+        <aside id="workspace-summary" class="workspace-summary" aria-live="polite">
+          <div>
+            <span>Entry model</span>
+            <strong id="entry-model">—</strong>
+          </div>
+          <div>
+            <span>Resolved dependencies</span>
+            <strong id="dependency-count">—</strong>
+          </div>
+          <div>
+            <span>Provider requests</span>
+            <strong id="provider-requests">—</strong>
+          </div>
+          <div>
+            <span>Workspace revision</span>
+            <code id="manifest-revision">—</code>
+          </div>
+          <div>
+            <span>Prepared fingerprint</span>
+            <code id="fingerprint">—</code>
+          </div>
+        </aside>
+      </section>
+
+      <details class="manual">
+        <summary>How to use this page</summary>
+        <ol class="manual-steps">
+          <li>
+            <h3>Start with a built-in example</h3>
+            <p>Choose a demo Document, then select Validate or Compute. The matching model workspace and Document are already loaded; no download or upload is required.</p>
+          </li>
+          <li>
+            <h3>Use your own files</h3>
+            <p>Use Load workspace folder for a directory of related models, or Choose model files to select them individually. Then choose the entry model. Load Document replaces the editable JSON input.</p>
+          </li>
+          <li>
+            <h3>Choose how the workspace is read</h3>
+            <p>Finite file map prepares all selected model sources together. On-demand provider requests only the models discovered through includes and imported typedefs.</p>
+          </li>
+          <li>
+            <h3>Prepare, validate, or compute</h3>
+            <p>Prepare workspace resolves the selected model and shows its dependencies. Validate and Compute prepare automatically when the model selection has changed. Runs repeats validation or computation against the same prepared interpreter and Document; one run reports elapsed time and multiple runs report p95.</p>
+          </li>
+          <li>
+            <h3>Choose the validation scope</h3>
+            <p>Full document validates the complete Document. Relevant scenario group validates only the group and coordinates shown beside the operation buttons. Results and failures appear as structured JSON.</p>
+          </li>
+          <li>
+            <h3>Local file handling</h3>
+            <p>Nothing is uploaded. The page reads selected models and Documents locally in the browser and does not store user-selected files in its offline cache.</p>
+          </li>
+        </ol>
+      </details>
+    </main>
+
+    <footer>
+      <span>Independent clean-room A12 interpreter</span>
+      <nav aria-label="Project information">
+        <a href="https://github.com/mbackschat/a12-interpreter-releases">GitHub release repository</a>
+        <a href="../privacy.html">Privacy notice</a>
+      </nav>
+    </footer>
+
+    <script>
+      globalThis.__a12FirstAnswerStartedAt = performance.now();
+    </script>
+  </body>
+</html>

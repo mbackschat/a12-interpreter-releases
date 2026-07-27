@@ -1,11 +1,11 @@
-21353ed7febd74cf5d47eda66561f461180ae236233bacd78064d46f85c4e50e  .github/workflows/build-release.yml
-827fecf35eb64eef1837f6d2f0a29378f4c516eb85117b9bad0dcbe0461f699b  .github/workflows/deploy-pages.yml
+c88008caa3a22630285727a13961eba8839434fea1283d5b56add571beee0dae  .github/workflows/build-release.yml
+004bc8924da3471eaa4a02e3b9cbd9f071a8fd7419f19698fb4945a4cd30e2d9  .github/workflows/deploy-pages.yml
 0b48607ba57003e7dcc55efce3304bdbcdd2fceccb88b51f31cd2722d868bd73  AGENTS.md
 532010c4f8c486435d989b97b5cec7f4d5fec77e312ec2574b6e963486277311  CHANGELOG.md
 479f5ec6c1f79d92f777aae2f3b6a10fd197ec390125af1ba77205e3e00a31f7  CLAUDE.md
 f766912e545373273f060cbd5215f55191f768fbf3e23c46b72aac83eaa3de7c  DISCLAIMER.md
 8c4ff33bc729231aed3ff9685cad067cf2d14301ccb703ef63daaf391290d38c  LICENSE
-20cc295750a9f0e41a66c8189242cc836b71c7c1c97d4c6eea80dff506711487  README.md
+5dbb58911dc75371903b09357e98c611deed8d2f177bdef8e6737973f5f859eb  README.md
 bba1afd036878571e71f166968e4c3de322b3cbc3f79bfa17f2f2ec6dfaad211  release-manifest.json
 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  site/.nojekyll
 4c7e5d0dc7cab4af79d6cb465e37dd0250e30deb2b32080766d8d408ca08accc  site/api/latest/INTERPRETER-API-GUIDE.md
@@ -1206,7 +1206,8 @@ a97a939f4d3abfce0f31bebf3d8683818b646925cf1a1fa2d2fd0d44960abc36  site/api/v0.9.
 850086e62c237c4137fb8cbda71662c3dabe886b4507cd862164bfe69103c914  site/api/v0.9.1/kotlin/ui-kit/ui-kit.min.js
 8522885ed287fceaafaf2ef61252b034b3456c44477a3fb8993a097221abda3e  site/api/v0.9.1/llms.txt
 79dcffe91ebae270a8c6521ea414162711b528b05dadbbcb5261df722ed63f44  site/api/v0.9.1/typescript/index.html
-63e6e8c8304b0e863c41296d8441c1ac34ffbae949137cca1168181cef6d7408  site/index.html
+5c361fcb4e400c918032467c90a0d5886e5c3d1fbfe2d623334ea01f2ced5201  site/index.html
+34fa98ab36912c600a53047145d461781fb1ffeb8454b9fac9e191238c95f3b1  site/maven/index.html
 85ec182697609fe84b2cf62bb966d892c89cd72ac5baba7bdab4aa072eb5f4ba  site/maven/io/github/mbackschat/a12/dm/dm-interpreter-js/0.9.1/dm-interpreter-js-0.9.1-javadoc.jar
 8ff39c3e5b9885c93e7dbca522f07174cfcf4d9c5ccbb0468414645a16cd900e  site/maven/io/github/mbackschat/a12/dm/dm-interpreter-js/0.9.1/dm-interpreter-js-0.9.1-javadoc.jar.md5
 266926c0151d7d16798d604e5a97475bde10ee206dda54349882d416b7f2bd73  site/maven/io/github/mbackschat/a12/dm/dm-interpreter-js/0.9.1/dm-interpreter-js-0.9.1-javadoc.jar.sha1

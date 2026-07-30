@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <!-- This module was also published with a richer model, Gradle metadata,  -->
+  <!-- which should be used instead. Do not delete the following line which  -->
+  <!-- is to indicate to Gradle or any Gradle module metadata file consumer  -->
+  <!-- that they should prefer consuming it instead. -->
+  <!-- do_not_remove: published-with-gradle-metadata -->
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.github.mbackschat.a12.dm</groupId>
+  <artifactId>dm-interpreter</artifactId>
+  <version>0.10.0</version>
+  <name>dm-interpreter</name>
+  <description>Kernel-free Kotlin Multiplatform interpreter for A12 document models.</description>
+  <url>https://github.com/mbackschat/a12-interpreter-releases/releases/tag/v0.10.0</url>
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://opensource.org/licenses/MIT</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>mbackschat</id>
+      <name>Martin Backschat</name>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:https://github.com/mbackschat/a12-interpreter-releases.git</connection>
+    <tag>v0.10.0</tag>
+    <url>https://github.com/mbackschat/a12-interpreter-releases/tree/v0.10.0</url>
+  </scm>
+  <dependencies>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-stdlib</artifactId>
+      <version>2.2.0</version>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
+</project>

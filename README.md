@@ -12,7 +12,7 @@ Use the built-in models and Documents or load your own local workspace. Your sel
 
 ## Documentation
 
-- [Read the developer guide](https://github.com/mbackschat/a12-interpreter-releases/blob/v0.9.1/site/api/v0.9.1/INTERPRETER-API-GUIDE.md) — rendered Markdown for the released version
+- [Read the developer guide](https://github.com/mbackschat/a12-interpreter-releases/blob/v0.10.0/site/api/v0.10.0/INTERPRETER-API-GUIDE.md) — rendered Markdown for the released version
 - [Browse the TypeScript API](https://mbackschat.github.io/a12-interpreter-releases/api/latest/typescript/)
 - [Browse the Kotlin API](https://mbackschat.github.io/a12-interpreter-releases/api/latest/kotlin/)
 - [Open the public release site](https://mbackschat.github.io/a12-interpreter-releases/) — current version, installation coordinates, showcase, API references, and privacy information
@@ -38,30 +38,27 @@ The package performs no implicit filesystem, network, storage, or credential acc
 Install the npm-compatible tarball directly from the GitHub Release:
 
 ```sh
-pnpm add https://github.com/mbackschat/a12-interpreter-releases/releases/download/v0.9.1/a12-interpreter-0.9.1.tgz
+pnpm add https://github.com/mbackschat/a12-interpreter-releases/releases/download/v0.10.0/a12-interpreter-0.10.0.tgz
 ```
 
 ```ts
 import {
   ModelWorkspace,
-  type DocumentInputV1,
+  type A12Document,
 } from "@mbackschat/a12-interpreter";
 
 const workspace = ModelWorkspace.fromSources([{json: rawModelJson}]);
 const prepared = workspace.prepare("permit-basic");
-const input: DocumentInputV1 = {
-  version: 1,
-  groups: [{path: "/Permit", coordinates: [1]}],
-  fields: [
-    {path: "/Permit/ApplicationNo", coordinates: [1, 1], raw: "P-42"},
-    {path: "/Permit/RequestedArea", coordinates: [1, 1], raw: "120"},
-  ],
+const input: A12Document = {
+  Permit: {ApplicationNo: "P-42", RequestedArea: 120},
 };
 const document = prepared.documents.readDocument(input);
 const result = prepared.createInterpreter().validateFull(document);
 ```
 
-Keep the prepared model and interpreter when a form validates repeated edits; decode a new immutable Document snapshot for each change.
+Documents are A12's own Document JSON — the shape the A12 Kernel serializes: a nested object tree, a repeating group as an array whose index is the repetition, native JSON for numbers and booleans.
+
+Keep the prepared model and interpreter when a form validates repeated edits; read a new immutable Document snapshot for each change.
 
 ## Kotlin and Java
 
@@ -74,14 +71,16 @@ repositories {
 }
 
 dependencies {
-    implementation("io.github.mbackschat.a12.dm:dm-interpreter:0.9.1")
+    implementation("io.github.mbackschat.a12.dm:dm-interpreter:0.10.0")
 }
 ```
 
 ```kotlin
 val source = WorkspaceModelSource.builder().json(rawModelJson).build()
 val prepared = ModelWorkspace.fromSources(listOf(source)).prepare("permit-basic")
-val document = prepared.documents.readDocument(input)
+val document = prepared.documents.readDocument(
+    """{"Permit":{"ApplicationNo":"P-42","RequestedArea":120}}""",
+)
 val report = prepared.createInterpreter().validateFull(document)
 ```
 
@@ -99,10 +98,10 @@ The browser showcase uses this same public provider/workspace boundary. You can 
 
 This release contains:
 
-- `a12-interpreter-0.9.1.tgz` — npm-compatible TypeScript/JavaScript package with the compiled browser/Node runtime, declarations, source maps, README, and license.
-- `dm-interpreter-0.9.1-maven-repository.zip` — complete offline Maven repository containing the Kotlin Multiplatform, JVM, and JS artifacts, Gradle metadata, POMs, documentation JARs, source JARs, and checksums.
-- `dm-interpreter-0.9.1-api-docs.zip` — versioned developer guide plus generated TypeScript and Kotlin API references for offline use or static hosting.
-- `dm-interpreter-0.9.1-showcase.zip` — deployable static browser showcase, including its built-in example workspaces, Documents, conformance data, and measured bundle metadata.
+- `a12-interpreter-0.10.0.tgz` — npm-compatible TypeScript/JavaScript package with the compiled browser/Node runtime, declarations, source maps, README, and license.
+- `dm-interpreter-0.10.0-maven-repository.zip` — complete offline Maven repository containing the Kotlin Multiplatform, JVM, and JS artifacts, Gradle metadata, POMs, documentation JARs, source JARs, and checksums.
+- `dm-interpreter-0.10.0-api-docs.zip` — versioned developer guide plus generated TypeScript and Kotlin API references for offline use or static hosting.
+- `dm-interpreter-0.10.0-showcase.zip` — deployable static browser showcase, including its built-in example workspaces, Documents, conformance data, and measured bundle metadata.
 - `release-manifest.json` — machine-readable release identity, source tag and commit, package coordinates, supported targets, artifact sizes, and SHA-256 digests.
 - `SHA256SUMS` — checksum list for verifying every release payload and the manifest.
 

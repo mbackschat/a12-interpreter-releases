@@ -1,24 +1,24 @@
 {
   "schemaVersion": 1,
-  "artifactVersion": "0.10.0",
-  "releaseTag": "v0.10.0",
+  "artifactVersion": "0.10.1",
+  "releaseTag": "v0.10.1",
   "source": {
     "repository": "mbackschat/a12-dmkits",
-    "tag": "interpreter-v0.10.0",
-    "sha": "5c1f04925c4f6d88641eb95bedd411fbbf79b416"
+    "tag": "interpreter-v0.10.1",
+    "sha": "a955143d6ca4197c27f46078a4c48e2f64bd59f5"
   },
   "packages": {
     "typescript": "@mbackschat/a12-interpreter",
-    "maven": "io.github.mbackschat.a12.dm:dm-interpreter:0.10.0"
+    "maven": "io.github.mbackschat.a12.dm:dm-interpreter:0.10.1"
   },
   "runtime": {
     "targets": ["jvm", "node", "browser"],
     "kernelBytecode": false
   },
   "artifacts": [
-    {"name":"a12-interpreter-0.10.0.tgz","bytes":1098452,"sha256":"d9fc00e84a573e13837bbfc9dd34208ca9cc62969f050bd29d9869e7f27514a1"},
-    {"name":"dm-interpreter-0.10.0-maven-repository.zip","bytes":9437527,"sha256":"5b2c278cdeee588088ab12c366772e0ad830e88945969e9c5caa0eaceb0fba75"},
-    {"name":"dm-interpreter-0.10.0-api-docs.zip","bytes":2043977,"sha256":"ea30ddfbb38d3133c8a1fb81f078a5ffa620654ee44a9dc236c6d442298f136e"},
-    {"name":"dm-interpreter-0.10.0-showcase.zip","bytes":304639,"sha256":"3a9264994d841935d22652d3283d159274800cae9e27d419ed21fc0fc3302257"}
+    {"name":"a12-interpreter-0.10.1.tgz","bytes":1132799,"sha256":"6e33b72555a267d202dafa7df6527d02a6dc20c6f1f142fb0cb64da128d89cae"},
+    {"name":"dm-interpreter-0.10.1-maven-repository.zip","bytes":9495683,"sha256":"816af67254f1844b98ca863002d2dcbb7e1d26dd228f1a729b080efc07ad1ffa"},
+    {"name":"dm-interpreter-0.10.1-api-docs.zip","bytes":2056558,"sha256":"90d191bcfb7dcb32b9b28340a6230f9076a8365d8895e0f28dcb1671832ce489"},
+    {"name":"dm-interpreter-0.10.1-showcase.zip","bytes":315333,"sha256":"123d0caf7ea973153684640cf90e29e49ae13f6ed1ae7267096ad164c5be41ab"}
   ]
 }

@@ -1,0 +1,123 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../dm-interpreter/0.10.1/dm-interpreter-0.10.1.module",
+    "group": "io.github.mbackschat.a12.dm",
+    "module": "dm-interpreter",
+    "version": "0.10.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.0.0"
+    }
+  },
+  "variants": [
+    {
+      "name": "jsApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.js.compiler": "ir",
+        "org.jetbrains.kotlin.platform.type": "js"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-dom-api-compat",
+          "version": {
+            "requires": "2.2.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.2.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "dm-interpreter-js-0.10.1.klib",
+          "url": "dm-interpreter-js-0.10.1.klib",
+          "size": 1591263,
+          "sha512": "2733c89e978b201f81544a54ce95a74f6ceb53d316d5d778f1a069134c8e4b19357cdb078e7718b9452124fd8f632298c46d2f28c08990d31cbfedf855340b72",
+          "sha256": "ef434ffd42a1f3967b7b03a7ea7e481db2db0a21e7452523c7d7fb8dd57313f9",
+          "sha1": "aa9cac34e737938e5baae7946a909f45c64c1bb4",
+          "md5": "20a2f0b6b0b95fb4c8a5f8d031273d79"
+        }
+      ]
+    },
+    {
+      "name": "jsRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.js.compiler": "ir",
+        "org.jetbrains.kotlin.platform.type": "js"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-dom-api-compat",
+          "version": {
+            "requires": "2.2.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.2.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-serialization-json",
+          "version": {
+            "requires": "1.9.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "dm-interpreter-js-0.10.1.klib",
+          "url": "dm-interpreter-js-0.10.1.klib",
+          "size": 1591263,
+          "sha512": "2733c89e978b201f81544a54ce95a74f6ceb53d316d5d778f1a069134c8e4b19357cdb078e7718b9452124fd8f632298c46d2f28c08990d31cbfedf855340b72",
+          "sha256": "ef434ffd42a1f3967b7b03a7ea7e481db2db0a21e7452523c7d7fb8dd57313f9",
+          "sha1": "aa9cac34e737938e5baae7946a909f45c64c1bb4",
+          "md5": "20a2f0b6b0b95fb4c8a5f8d031273d79"
+        }
+      ]
+    },
+    {
+      "name": "jsSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.js.compiler": "ir",
+        "org.jetbrains.kotlin.platform.type": "js"
+      },
+      "files": [
+        {
+          "name": "dm-interpreter-js-0.10.1-sources.jar",
+          "url": "dm-interpreter-js-0.10.1-sources.jar",
+          "size": 416487,
+          "sha512": "e7baafbdc6c39478e60d31ef680a8b2cbd542dd83ffca31be671ecc054cb89b035a192f996715bc0eebf55a805e6ecdf7abeba7fbed86204a818227138ca9074",
+          "sha256": "cf70bc09957d5b375e797fda56575cf9c62905c7761e9f937d331599c14b5071",
+          "sha1": "4cc7c42142d6077db237682974852d5950350c95",
+          "md5": "b61fd5f0e6c4e3883738098284fbde8c"
+        }
+      ]
+    }
+  ]
+}

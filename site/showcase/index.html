@@ -8,8 +8,8 @@
       content="Prepare A12 model workspaces and run validation and computation in your browser."
     >
     <title>A12 Interpreter Playground</title>
-    <script type="module" crossorigin src="/a12-interpreter-releases/showcase/assets/index-BID8hQ51.js"></script>
-    <link rel="stylesheet" crossorigin href="/a12-interpreter-releases/showcase/assets/index-MZ9PXmuh.css">
+    <script type="module" crossorigin src="/a12-interpreter-releases/showcase/assets/index-BlXolJcv.js"></script>
+    <link rel="stylesheet" crossorigin href="/a12-interpreter-releases/showcase/assets/index-CnZ7MBq4.css">
   </head>
   <body>
     <header class="site-header">
@@ -79,6 +79,7 @@
               <option value="firing">Permit that fires a rule</option>
               <option value="formal-invalid">Permit with an invalid number</option>
               <option value="computation">Permit computation input</option>
+              <option value="computed-error">Permit with a computed target error</option>
               <option value="include-typedef">Included model + typedef input</option>
             </select>
           </label>
@@ -118,15 +119,37 @@
             <summary>Offline use</summary>
             <div class="details-body">
               <p>Disabled by default. Enabling offline use stores only the built-in showcase files in this browser. It does not store files you select.</p>
-              <button id="enable-offline" type="button">Enable offline use</button>
+              <button id="enable-offline" type="button" title="Cache the built-in showcase files for offline use.">Enable offline use</button>
             </div>
           </details>
         </div>
 
+        <div class="model-workspace-actions" aria-label="Model workspace operations">
+          <span>Model workspace:</span>
+          <button id="prepare" type="button" title="Resolve and prepare the selected DocumentModel workspace.">Prepare workspace</button>
+          <button id="check-support" type="button" title="Report rules and computations unsupported by this interpreter configuration.">Check model support</button>
+        </div>
+
         <div class="actions" aria-label="Interpreter operations">
-          <button id="validate" class="primary" type="button">Validate</button>
-          <button id="compute" type="button">Compute</button>
-          <button id="prepare" type="button">Prepare workspace</button>
+          <p class="operation-help">
+            <strong>Validate checks the current Document as-is.</strong>
+            Each computation also contributes an implicit consistency rule, so a filled calculated field that differs from its computed value appears as a finding. Compute previews results; Apply results writes the retained actions into the editable Document; Compute → Apply → Validate runs the form-engine flow.
+          </p>
+          <button id="validate" class="primary" type="button" title="Validate the current Document using the selected scope.">Validate</button>
+          <button id="compute" type="button" title="Compute all model computations without changing the Document.">Compute</button>
+          <button id="apply-computations" type="button" title="Apply the retained computation actions to the current Document." disabled>Apply results</button>
+          <button id="compute-apply-validate" class="workflow" type="button" title="Compute, apply the retained actions, then validate the updated Document.">Compute → Apply → Validate</button>
+          <div id="validation-scope" class="validation-scope-control" role="radiogroup" aria-labelledby="validation-scope-label">
+            <span id="validation-scope-label">Validation:</span>
+            <label>
+              <input id="validation-scope-full" type="radio" name="validation-scope" value="full" checked>
+              Full
+            </label>
+            <label>
+              <input id="validation-scope-partial" type="radio" name="validation-scope" value="partial">
+              Partial
+            </label>
+          </div>
           <label class="operation-runs-control">
             Runs
             <input
@@ -138,13 +161,6 @@
               value="1"
               inputmode="numeric"
             >
-          </label>
-          <label class="validation-scope-control">
-            Validation scope
-            <select id="validation-scope">
-              <option value="full">Full document</option>
-              <option value="relevant">Relevant scenario group</option>
-            </select>
           </label>
           <div id="relevant-selection" class="relevant-selection" hidden>
             <label>
@@ -162,9 +178,10 @@
           <section class="editor-panel" aria-labelledby="document-title">
             <div class="panel-heading">
               <h3 id="document-title">Document</h3>
+              <button id="seed-document" class="document-seed" type="button" title="Replace the editor contents with a model-shaped starter Document.">Use model-shaped starter</button>
             </div>
             <label class="editor-label" for="document-input">Document JSON</label>
-            <p class="editor-help">This editable JSON is the Document passed to Validate or Compute. Choosing a demo Document or loading a Document file replaces it.</p>
+            <p class="editor-help">This editable JSON is the Document passed to Validate or Compute. A model-shaped starter includes every declared field and group, with one row per repeatable group.</p>
             <textarea id="document-input" spellcheck="false"></textarea>
             <h4>Use your own files</h4>
             <p class="upload-intro">
@@ -217,6 +234,11 @@
           </section>
 
           <section class="result-panel" aria-labelledby="result-title">
+            <details id="model-inspector" class="model-inspector">
+              <summary>Prepared DocumentModel JSON</summary>
+              <p>This is the expanded A12 DocumentModel used by the operations below, including its rules, computations, and descriptions.</p>
+              <pre id="model-json" tabindex="0">Prepare a workspace to inspect its DocumentModel.</pre>
+            </details>
             <div class="panel-heading">
               <h3 id="result-title">Result</h3>
               <span>Selected files stay in this browser.</span>
@@ -269,7 +291,7 @@
           </li>
           <li>
             <h3>Use your own files</h3>
-            <p>Use Load workspace folder for a directory of related models, or Choose model files to select them individually. Then choose the entry model. Load Document replaces the editable JSON input.</p>
+            <p>Use Load workspace folder for a directory of related models, or Choose model files to select them individually. Then choose the entry model. Preparing a different model replaces stale demo input with a model-shaped starter; Use model-shaped starter regenerates it explicitly. Load Document replaces the editable JSON input.</p>
           </li>
           <li>
             <h3>Choose how the workspace is read</h3>
@@ -277,11 +299,11 @@
           </li>
           <li>
             <h3>Prepare, validate, or compute</h3>
-            <p>Prepare workspace resolves the selected model and shows its dependencies. Validate and Compute prepare automatically when the model selection has changed. Runs repeats validation or computation against the same prepared interpreter and Document; one run reports elapsed time and multiple runs report p95.</p>
+            <p>Prepare workspace resolves the selected model and shows its dependencies. Check model support reports admitted rules or computations that the configured interpreter cannot evaluate without reading the Document. Validate checks the current Document as-is; each computation has an implicit consistency rule, so a stale filled target appears as a validation finding. Compute retains a result without changing the Document, Apply results writes those exact actions into the editable Document, and Compute → Apply → Validate runs that form-engine sequence in one step. Runs repeats validation, computation, or the complete form flow against the same prepared interpreter and Document source; one run reports elapsed time and multiple runs report p95.</p>
           </li>
           <li>
             <h3>Choose the validation scope</h3>
-            <p>Full document validates the complete Document. Relevant scenario group validates only the group and coordinates shown beside the operation buttons. Results and failures appear as structured JSON.</p>
+            <p>Full validates the complete Document. Partial validates only the model-defined effects of the path and coordinates shown beside the operation buttons. Results and failures appear as structured JSON.</p>
           </li>
           <li>
             <h3>Local file handling</h3>

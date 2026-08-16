@@ -1,0 +1,39 @@
+{
+    "meta": {
+        "id": "current-repetition-ordered-rows-clean",
+        "kernelVersion": "30.8.1",
+        "source": "curated",
+        "sections": [
+            "§9"
+        ],
+        "tags": [
+            "current-repetition",
+            "correlation",
+            "having"
+        ],
+        "notes": "strictly increasing quantities stay clean — including row 1, whose EMPTY predecessor set folds MaxValue to 0 (0 >= 3 is false), not to a fire or a suppression"
+    },
+    "modelRef": "models/cart-qty-order.json",
+    "document": {
+        "Cart": {
+            "Lines": [
+                {
+                    "ItemId": "K1",
+                    "Qty": 3
+                },
+                {
+                    "ItemId": "K2",
+                    "Qty": 4
+                },
+                {
+                    "ItemId": "K3",
+                    "Qty": 5
+                }
+            ]
+        }
+    },
+    "op": {
+        "kind": "validateFull"
+    },
+    "expected": []
+}

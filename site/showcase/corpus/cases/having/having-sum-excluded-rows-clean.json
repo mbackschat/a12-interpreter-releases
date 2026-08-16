@@ -1,0 +1,41 @@
+{
+    "meta": {
+        "id": "having-sum-excluded-rows-clean",
+        "kernelVersion": "30.8.1",
+        "source": "curated",
+        "sections": [
+            "§9"
+        ],
+        "tags": [
+            "having",
+            "aggregates"
+        ],
+        "notes": "the kept rows sum to 4 (not > 5) while the UNFILTERED sum 14 would fire — the clean case is what distinguishes a filter-honoring engine"
+    },
+    "modelRef": "models/order-light-sum.json",
+    "document": {
+        "Order": {
+            "Items": [
+                {
+                    "Count": 2,
+                    "Sku": "A",
+                    "UnitWeight": 1.0
+                },
+                {
+                    "Count": 10,
+                    "Sku": "B",
+                    "UnitWeight": 2.0
+                },
+                {
+                    "Count": 2,
+                    "Sku": "C",
+                    "UnitWeight": 1.0
+                }
+            ]
+        }
+    },
+    "op": {
+        "kind": "validateFull"
+    },
+    "expected": []
+}

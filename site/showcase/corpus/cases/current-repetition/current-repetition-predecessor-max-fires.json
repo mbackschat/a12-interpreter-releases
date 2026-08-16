@@ -1,0 +1,41 @@
+{
+    "meta": {
+        "id": "current-repetition-predecessor-max-fires",
+        "kernelVersion": "30.8.1",
+        "source": "curated",
+        "sections": [
+            "§9"
+        ],
+        "tags": [
+            "current-repetition",
+            "correlation",
+            "having"
+        ],
+        "notes": "the predecessors idiom `CurrentRepetition(Lines) < CurrentRepetition($Lines)`: quantities 5,3,9 fire exactly on row 2 (its predecessor max 5 >= 3); row 3's predecessor max 5 < 9 stays clean"
+    },
+    "modelRef": "models/cart-qty-order.json",
+    "document": {
+        "Cart": {
+            "Lines": [
+                {
+                    "ItemId": "K1",
+                    "Qty": 5
+                },
+                {
+                    "ItemId": "K2",
+                    "Qty": 3
+                },
+                {
+                    "ItemId": "K3",
+                    "Qty": 9
+                }
+            ]
+        }
+    },
+    "op": {
+        "kind": "validateFull"
+    },
+    "expected": [
+        "QTY_ORDER|OMISSION_ERROR|/Cart[1]/Lines[2]/Qty"
+    ]
+}

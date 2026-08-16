@@ -1,0 +1,50 @@
+{
+    "meta": {
+        "id": "parallel-iteration-empty-side-reads-zero",
+        "kernelVersion": "30.8.1",
+        "source": "curated",
+        "sections": [
+            "§9",
+            "§12"
+        ],
+        "tags": [
+            "parallel-iteration",
+            "empty",
+            "polarity"
+        ],
+        "notes": "the join is BY KEY, never by row position: Sales 9>5 fires VALUE (all specified); Eng's missing Supply side reads empty-as-0, 3>0 fires OMISSION; Ops 0>2 stays silent"
+    },
+    "modelRef": "models/staffing-demand-exceeds-supply.json",
+    "document": {
+        "Staffing": {
+            "PlanName": "Q3",
+            "Demand": [
+                {
+                    "Department": "Sales",
+                    "Headcount": 9
+                },
+                {
+                    "Department": "Eng",
+                    "Headcount": 3
+                }
+            ],
+            "Supply": [
+                {
+                    "Department": "Sales",
+                    "Headcount": 5
+                },
+                {
+                    "Department": "Ops",
+                    "Headcount": 2
+                }
+            ]
+        }
+    },
+    "op": {
+        "kind": "validateFull"
+    },
+    "expected": [
+        "OVER_DEMAND|OMISSION_ERROR|/Staffing[1]/Demand[2]/Headcount",
+        "OVER_DEMAND|VALUE_ERROR|/Staffing[1]/Demand[1]/Headcount"
+    ]
+}

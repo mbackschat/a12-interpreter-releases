@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "artifactVersion": "0.13.0",
+  "releaseTag": "v0.13.0",
+  "source": {
+    "repository": "mbackschat/a12-dmkits",
+    "tag": "interpreter-v0.13.0",
+    "sha": "f559b5b3c5fb4d27b2f5deb9e73fa4529be4f51e"
+  },
+  "packages": {
+    "typescript": "@mbackschat/a12-interpreter",
+    "maven": "io.github.mbackschat.a12.dm:dm-interpreter:0.13.0"
+  },
+  "runtime": {
+    "targets": ["jvm", "node", "browser"],
+    "kernelBytecode": false
+  },
+  "artifacts": [
+    {"name":"a12-interpreter-0.13.0.tgz","bytes":1273873,"sha256":"c8401616b386998eeb2bac5e8ccde6113acf3564364e1ad746993a00057d9d38"},
+    {"name":"dm-interpreter-0.13.0-maven-repository.zip","bytes":10327088,"sha256":"b9778b81a1cb6d677b7380e7a3e7c71d4a2367a10566accc87bf1522405dbd09"},
+    {"name":"dm-interpreter-0.13.0-api-docs.zip","bytes":2173358,"sha256":"d5ca0deda869699613612d8c1e0ac519b4557bd06f4879f68a56f16c79155b0e"},
+    {"name":"dm-interpreter-0.13.0-showcase.zip","bytes":332525,"sha256":"e186bd910ad2728f05c7a4a980cb5cae3ec7476ada5337e84d33e0df7f645eb6"}
+  ]
+}

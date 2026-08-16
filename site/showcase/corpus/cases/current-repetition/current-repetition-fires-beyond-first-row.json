@@ -1,0 +1,42 @@
+{
+    "meta": {
+        "id": "current-repetition-fires-beyond-first-row",
+        "kernelVersion": "30.8.1",
+        "source": "curated",
+        "sections": [
+            "§9",
+            "§12"
+        ],
+        "tags": [
+            "current-repetition",
+            "polarity"
+        ],
+        "notes": "CurrentRepetition is the 1-based structural row index: rows 2,3 fire, row 1 does not — and the fired type is VALUE (no fill can change a row's index)"
+    },
+    "modelRef": "models/cart-beyond-first-line.json",
+    "document": {
+        "Cart": {
+            "Lines": [
+                {
+                    "ItemId": "K1",
+                    "Qty": 5
+                },
+                {
+                    "ItemId": "K2",
+                    "Qty": 5
+                },
+                {
+                    "ItemId": "K3",
+                    "Qty": 5
+                }
+            ]
+        }
+    },
+    "op": {
+        "kind": "validateFull"
+    },
+    "expected": [
+        "BEYOND_FIRST|VALUE_ERROR|/Cart[1]/Lines[2]/Qty",
+        "BEYOND_FIRST|VALUE_ERROR|/Cart[1]/Lines[3]/Qty"
+    ]
+}

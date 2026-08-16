@@ -1,0 +1,31 @@
+{
+    "meta": {
+        "id": "filter-single-row-self-excluded-clean",
+        "kernelVersion": "30.8.1",
+        "source": "curated",
+        "sections": [
+            "§9"
+        ],
+        "tags": [
+            "filter",
+            "correlation",
+            "having"
+        ],
+        "notes": "a single row: `CurrentRepetition(Items) != CurrentRepetition($Items)` excludes the only row, so the correlated quantifier can never fire"
+    },
+    "modelRef": "models/order-duplicate-count.json",
+    "document": {
+        "Order": {
+            "Items": [
+                {
+                    "Count": 5,
+                    "Sku": "A"
+                }
+            ]
+        }
+    },
+    "op": {
+        "kind": "validateFull"
+    },
+    "expected": []
+}

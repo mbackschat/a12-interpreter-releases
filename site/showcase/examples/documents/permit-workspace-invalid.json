@@ -1,0 +1,10 @@
+{
+  "Permit": {
+    "ApplicationCode": "ABCDEFGHIJKLM",
+    "Review": {
+      "Inspection": {
+        "Score": -1
+      }
+    }
+  }
+}

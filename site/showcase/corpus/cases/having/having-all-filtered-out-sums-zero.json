@@ -1,0 +1,39 @@
+{
+    "meta": {
+        "id": "having-all-filtered-out-sums-zero",
+        "kernelVersion": "30.8.1",
+        "source": "curated",
+        "sections": [
+            "§9"
+        ],
+        "tags": [
+            "having",
+            "aggregates",
+            "empty"
+        ],
+        "notes": "the filter keeps NO row — the empty keep-set folds to the Sum identity 0, so `== 0` fires"
+    },
+    "modelRef": "models/order-no-light-items.json",
+    "document": {
+        "Order": {
+            "Items": [
+                {
+                    "Count": 3,
+                    "Sku": "A",
+                    "UnitWeight": 2.0
+                },
+                {
+                    "Count": 10,
+                    "Sku": "B",
+                    "UnitWeight": 2.0
+                }
+            ]
+        }
+    },
+    "op": {
+        "kind": "validateFull"
+    },
+    "expected": [
+        "NO_LIGHT|OMISSION_ERROR|/Order[1]/Items[1]/Count"
+    ]
+}

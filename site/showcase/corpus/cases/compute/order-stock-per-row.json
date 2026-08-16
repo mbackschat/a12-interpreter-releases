@@ -1,0 +1,37 @@
+{
+    "meta": {
+        "id": "order-stock-per-row",
+        "kernelVersion": "30.8.1",
+        "source": "curated",
+        "sections": [
+            "§9",
+            "§11"
+        ],
+        "tags": [
+            "compute"
+        ],
+        "notes": "a per-row computation over a repeatable group — per-row identity"
+    },
+    "modelRef": "models/order-stock-compute.json",
+    "document": {
+        "Order": {
+            "Items": [
+                {
+                    "Count": 2,
+                    "Sku": "A"
+                },
+                {
+                    "Count": 3,
+                    "Sku": "B"
+                }
+            ]
+        }
+    },
+    "op": {
+        "kind": "compute"
+    },
+    "computeExpected": [
+        "/Order[1]/Items[1]/StockQty|VALUE|20",
+        "/Order[1]/Items[2]/StockQty|VALUE|30"
+    ]
+}

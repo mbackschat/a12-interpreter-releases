@@ -1,0 +1,1 @@
+sourceset_dependencies='{":interpreter/commonMain":[],":interpreter/jsMain":[":interpreter/commonMain"],":interpreter/jvmMain":[":interpreter/commonMain"]}'

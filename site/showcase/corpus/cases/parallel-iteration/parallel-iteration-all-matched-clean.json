@@ -1,0 +1,44 @@
+{
+    "meta": {
+        "id": "parallel-iteration-all-matched-clean",
+        "kernelVersion": "30.8.1",
+        "source": "curated",
+        "sections": [
+            "§9"
+        ],
+        "tags": [
+            "parallel-iteration"
+        ],
+        "notes": "every Department value has a filled row on both sides — the outer join finds no unmatched side, nothing fires"
+    },
+    "modelRef": "models/staffing-coverage-pair.json",
+    "document": {
+        "Staffing": {
+            "PlanName": "Q3",
+            "Demand": [
+                {
+                    "Department": "Sales",
+                    "Headcount": 5
+                },
+                {
+                    "Department": "Eng",
+                    "Headcount": 3
+                }
+            ],
+            "Supply": [
+                {
+                    "Department": "Sales",
+                    "Headcount": 2
+                },
+                {
+                    "Department": "Eng",
+                    "Headcount": 4
+                }
+            ]
+        }
+    },
+    "op": {
+        "kind": "validateFull"
+    },
+    "expected": []
+}

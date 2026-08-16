@@ -1,0 +1,29 @@
+{
+    "meta": {
+        "id": "str-empty-eq-suppressed",
+        "kernelVersion": "30.8.1",
+        "source": "curated",
+        "sections": [
+            "§2",
+            "§7"
+        ],
+        "tags": [
+            "f6",
+            "empty",
+            "strings",
+            "f6-pair-operator"
+        ],
+        "notes": "a direct == over an empty String is not evaluated; pairs with str-empty-length-lt-omission on the varied axis = the operator applied to the same empty ProductCode"
+    },
+    "modelRef": "models/order-code-equals.json",
+    "document": {
+        "Order": {
+            "CustomerName": "Acme",
+            "ProductCode": null
+        }
+    },
+    "op": {
+        "kind": "validateFull"
+    },
+    "expected": []
+}

@@ -1,0 +1,43 @@
+{
+    "meta": {
+        "id": "parallel-iteration-invalid-index-suppresses",
+        "kernelVersion": "30.8.1",
+        "source": "curated",
+        "sections": [
+            "§9"
+        ],
+        "tags": [
+            "parallel-iteration",
+            "invalid-index"
+        ],
+        "notes": "an EMPTY Department cell makes Supply's index invalid: references into Supply read 3VL UNKNOWN, suppressing the negative operator for Sales — only Ops (a valid Supply-only key) fires at Demand[-5]; the empty index cell itself draws the formal mandatoryField"
+    },
+    "modelRef": "models/staffing-coverage-pair.json",
+    "document": {
+        "Staffing": {
+            "PlanName": "Q3",
+            "Demand": [
+                {
+                    "Department": "Sales",
+                    "Headcount": 5
+                }
+            ],
+            "Supply": [
+                {
+                    "Department": "Ops",
+                    "Headcount": 2
+                },
+                {
+                    "Headcount": 4
+                }
+            ]
+        }
+    },
+    "op": {
+        "kind": "validateFull"
+    },
+    "expected": [
+        "COVER_PAIR|OMISSION_ERROR|/Staffing[1]/Demand[-5]/Headcount",
+        "mandatoryField|OMISSION_ERROR|/Staffing[1]/Supply[2]/Department"
+    ]
+}

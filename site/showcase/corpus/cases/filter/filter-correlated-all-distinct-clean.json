@@ -1,0 +1,39 @@
+{
+    "meta": {
+        "id": "filter-correlated-all-distinct-clean",
+        "kernelVersion": "30.8.1",
+        "source": "curated",
+        "sections": [
+            "§9"
+        ],
+        "tags": [
+            "filter",
+            "correlation",
+            "having"
+        ],
+        "notes": "all counts distinct — the self-excluded value join keeps no row for any outer row, nothing fires"
+    },
+    "modelRef": "models/order-duplicate-count.json",
+    "document": {
+        "Order": {
+            "Items": [
+                {
+                    "Count": 5,
+                    "Sku": "A"
+                },
+                {
+                    "Count": 6,
+                    "Sku": "B"
+                },
+                {
+                    "Count": 9,
+                    "Sku": "C"
+                }
+            ]
+        }
+    },
+    "op": {
+        "kind": "validateFull"
+    },
+    "expected": []
+}

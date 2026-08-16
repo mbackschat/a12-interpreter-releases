@@ -1,0 +1,42 @@
+{
+    "meta": {
+        "id": "filter-dominant-row-fires",
+        "kernelVersion": "30.8.1",
+        "source": "curated",
+        "sections": [
+            "§9"
+        ],
+        "tags": [
+            "filter",
+            "correlation",
+            "having",
+            "aggregates"
+        ],
+        "notes": "a VALUE aggregate over the $-self-excluded keep-set: counts 3,9,2 fire exactly on row 2 (9 > the OTHERS' sum 5) — an engine summing ALL rows (no exclusion) or only the own row could never fire it"
+    },
+    "modelRef": "models/order-dominant-count.json",
+    "document": {
+        "Order": {
+            "Items": [
+                {
+                    "Count": 3,
+                    "Sku": "A"
+                },
+                {
+                    "Count": 9,
+                    "Sku": "B"
+                },
+                {
+                    "Count": 2,
+                    "Sku": "C"
+                }
+            ]
+        }
+    },
+    "op": {
+        "kind": "validateFull"
+    },
+    "expected": [
+        "DOMINANT_COUNT|OMISSION_ERROR|/Order[1]/Items[2]/Count"
+    ]
+}

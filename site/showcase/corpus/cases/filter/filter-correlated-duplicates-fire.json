@@ -1,0 +1,42 @@
+{
+    "meta": {
+        "id": "filter-correlated-duplicates-fire",
+        "kernelVersion": "30.8.1",
+        "source": "curated",
+        "sections": [
+            "§9"
+        ],
+        "tags": [
+            "filter",
+            "correlation",
+            "having"
+        ],
+        "notes": "[$Count] binds each filter evaluation to the OUTER iterating row — counts 5,5,9 fire exactly on the two duplicate rows"
+    },
+    "modelRef": "models/order-duplicate-count.json",
+    "document": {
+        "Order": {
+            "Items": [
+                {
+                    "Count": 5,
+                    "Sku": "A"
+                },
+                {
+                    "Count": 5,
+                    "Sku": "B"
+                },
+                {
+                    "Count": 9,
+                    "Sku": "C"
+                }
+            ]
+        }
+    },
+    "op": {
+        "kind": "validateFull"
+    },
+    "expected": [
+        "DUP_COUNT|OMISSION_ERROR|/Order[1]/Items[1]/Count",
+        "DUP_COUNT|OMISSION_ERROR|/Order[1]/Items[2]/Count"
+    ]
+}

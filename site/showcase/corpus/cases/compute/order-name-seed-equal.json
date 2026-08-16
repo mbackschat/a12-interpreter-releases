@@ -1,0 +1,26 @@
+{
+    "meta": {
+        "id": "order-name-seed-equal",
+        "kernelVersion": "30.8.1",
+        "source": "curated",
+        "sections": [
+            "§11"
+        ],
+        "tags": [
+            "compute",
+            "granularity"
+        ],
+        "notes": "a computed STRING equal to its seeded input — a kernel non-change; report-all engines project (§7)"
+    },
+    "modelRef": "models/order-name-compute.json",
+    "document": {
+        "Order": {
+            "CustomerName": "AB-X",
+            "ProductCode": "AB"
+        }
+    },
+    "op": {
+        "kind": "compute"
+    },
+    "computeExpected": []
+}

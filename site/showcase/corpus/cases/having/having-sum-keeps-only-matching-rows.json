@@ -1,0 +1,43 @@
+{
+    "meta": {
+        "id": "having-sum-keeps-only-matching-rows",
+        "kernelVersion": "30.8.1",
+        "source": "curated",
+        "sections": [
+            "§9"
+        ],
+        "tags": [
+            "having",
+            "aggregates"
+        ],
+        "notes": "the filter keeps only the weight-1 rows (3+4=7 > 5) — the excluded 10 never enters the sum; star-only, so ONE fire at the pinned first-row anchor (IF127)"
+    },
+    "modelRef": "models/order-light-sum.json",
+    "document": {
+        "Order": {
+            "Items": [
+                {
+                    "Count": 3,
+                    "Sku": "A",
+                    "UnitWeight": 1.0
+                },
+                {
+                    "Count": 10,
+                    "Sku": "B",
+                    "UnitWeight": 2.0
+                },
+                {
+                    "Count": 4,
+                    "Sku": "C",
+                    "UnitWeight": 1.0
+                }
+            ]
+        }
+    },
+    "op": {
+        "kind": "validateFull"
+    },
+    "expected": [
+        "LIGHT_SUM|OMISSION_ERROR|/Order[1]/Items[1]/Count"
+    ]
+}

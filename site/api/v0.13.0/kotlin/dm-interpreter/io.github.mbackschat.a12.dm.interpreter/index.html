@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>io.github.mbackschat.a12.dm.interpreter</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../index.html" tabindex="1">
+                    dm-interpreter
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+0.13.0        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
+                        data-filter=":interpreter/commonMain">common</button>
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter=":interpreter/jvmMain">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":interpreter/commonMain"
+                                       data-filter=":interpreter/commonMain"/>
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":interpreter/jvmMain"
+                                       data-filter=":interpreter/jvmMain"/>
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    dm-interpreter
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageIds="dm-interpreter::io.github.mbackschat.a12.dm.interpreter////PointingToDeclaration//-2048701494">
+  <div class="breadcrumbs"><a href="../../index.html">dm-interpreter</a><span class="delimiter">/</span><span class="current">io.github.mbackschat.a12.dm.interpreter</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="700961168%2FClasslikes%2F526105075" anchor-label="A12PartiallyKnownMultiPointer" id="700961168%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-a12-partially-known-multi-pointer/index.html"><span>A12Partially</span><wbr></wbr><span>Known</span><wbr></wbr><span>Multi</span><wbr></wbr><span><span>Pointer</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="700961168%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-a12-partially-known-multi-pointer/index.html">A12PartiallyKnownMultiPointer</a></div><div class="brief "><p class="paragraph">A12's <code class="lang-kotlin">PartiallyKnownDocumentMultiPointer</code> — the addressing type the <strong>message channel</strong> uses.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="253699889%2FClasslikes%2F526105075" anchor-label="A12PathPart" id="253699889%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-a12-path-part/index.html"><span>A12Path</span><wbr></wbr><span><span>Part</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="253699889%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-a12-path-part/index.html">A12PathPart</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>name<span class="token operator">: </span><span data-unresolved-link="kotlin/String///PointingToDeclaration/">String</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>repetitionIndex<span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">One part of an exact A12 pointer — the counterpart of A12's <code class="lang-kotlin">PathPart</code>: a <code class="lang-kotlin">name</code> and a <code class="lang-kotlin">repetitionIndex</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1414314972%2FClasslikes%2F526105075" anchor-label="A12Pointer" id="1414314972%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-a12-pointer/index.html"><span><span>A12Pointer</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1414314972%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-a12-pointer/index.html">A12Pointer</a></div><div class="brief "><p class="paragraph">One <strong>exact</strong> A12 <code class="lang-kotlin">DocumentPointer</code>: an ordered list of <a href="-a12-path-part/index.html">A12PathPart</a>, with A12's derived views over it.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="759210853%2FClasslikes%2F526105075" anchor-label="A12PointerFormat" id="759210853%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-a12-pointer-format/index.html"><span>A12Pointer</span><wbr></wbr><span><span>Format</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="759210853%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-a12-pointer-format/index.html">A12PointerFormat</a></div><div class="brief "><p class="paragraph">A12's canonical <strong>exact</strong> <code class="lang-kotlin">DocumentPointer</code> string — the project's single addressing form for a resolved cell (CLAUDE.md &quot;NEVER invent a shape A12 already defines&quot;). Grammar, per kernel 30.8.1 <code class="lang-kotlin">DocumentPointerImpl</code>/<code class="lang-kotlin">PathPartImpl</code>: parts joined by <code class="lang-kotlin">/</code>, each part a <code class="lang-kotlin">name</code> optionally followed by <code class="lang-kotlin">[n]</code>. An absent bracket means repetition 1 and the canonical form <i>omits</i> <code class="lang-kotlin">[1]</code>, so <code class="lang-kotlin">Recipe/Ingredients[3]/Name</code> is canonical and a field part carries no bracket. A leading <code class="lang-kotlin">/</code> is accepted and stripped as redundant; a trailing <code class="lang-kotlin">/</code> is rejected.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="59597292%2FClasslikes%2F526105075" anchor-label="ComputationOutcome" id="59597292%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-computation-outcome/index.html"><span>Computation</span><wbr></wbr><span><span>Outcome</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="59597292%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-computation-outcome/index.html">ComputationOutcome</a> : <span data-unresolved-link="kotlin/Enum///PointingToDeclaration/">Enum</span><span class="token operator">&lt;</span><a href="-computation-outcome/index.html">ComputationOutcome</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Result state of one computed field cell.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1837374704%2FClasslikes%2F526105075" anchor-label="ComputationReport" id="-1837374704%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-computation-report/index.html"><span>Computation</span><wbr></wbr><span><span>Report</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1837374704%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-computation-report/index.html">ComputationReport</a> : <a href="-model-owned/index.html">ModelOwned</a></div><div class="brief "><p class="paragraph">Immutable retained result for one source computation. <code class="lang-kotlin">results</code> remains the report-all observation; <code class="lang-kotlin">actions</code> is its source-relative application subset. Applying to another snapshot never recomputes against that destination.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1533761607%2FClasslikes%2F526105075" anchor-label="ComputationResult" id="1533761607%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-computation-result/index.html"><span>Computation</span><wbr></wbr><span><span>Result</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1533761607%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-computation-result/index.html">ComputationResult</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>pointer<span class="token operator">: </span><a href="-field-pointer/index.html">FieldPointer</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>outcome<span class="token operator">: </span><a href="-computation-outcome/index.html">ComputationOutcome</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>value<span class="token operator">: </span><span data-unresolved-link="kotlin/String///PointingToDeclaration/">String</span><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>diagnostic<span class="token operator">: </span><a href="-validation-finding/index.html">ValidationFinding</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Detached outcome of one computed field cell.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="926183841%2FClasslikes%2F526105075" anchor-label="CustomCondition" id="926183841%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-custom-condition/index.html"><span>Custom</span><wbr></wbr><span><span>Condition</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="926183841%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token keyword">interface </span><a href="-custom-condition/index.html">CustomCondition</a></div><div class="brief "><p class="paragraph">Synchronous document-aware error-condition SPI; <code class="lang-kotlin">true</code> means the containing rule fires.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-767079647%2FClasslikes%2F526105075" anchor-label="CustomConditionDocumentView" id="-767079647%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-custom-condition-document-view/index.html"><span>Custom</span><wbr></wbr><span>Condition</span><wbr></wbr><span>Document</span><wbr></wbr><span><span>View</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-767079647%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-custom-condition-document-view/index.html">CustomConditionDocumentView</a> : <a href="-model-owned/index.html">ModelOwned</a></div><div class="brief "><p class="paragraph">Read-only, model-owned document view supplied only while a custom condition is executing.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1401770217%2FClasslikes%2F526105075" anchor-label="CustomConditionFactory" id="-1401770217%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-custom-condition-factory/index.html"><span>Custom</span><wbr></wbr><span>Condition</span><wbr></wbr><span><span>Factory</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1401770217%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token keyword">interface </span><a href="-custom-condition-factory/index.html">CustomConditionFactory</a></div><div class="brief "><p class="paragraph">Name-resolving source of custom conditions; <code class="lang-kotlin">null</code> means unsupported.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="106444529%2FClasslikes%2F526105075" anchor-label="CustomConditionInvocation" id="106444529%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-custom-condition-invocation/index.html"><span>Custom</span><wbr></wbr><span>Condition</span><wbr></wbr><span><span>Invocation</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="106444529%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-custom-condition-invocation/index.html">CustomConditionInvocation</a></div><div class="brief "><p class="paragraph">Exact document, relevance, formal-error, and error-pointer inputs of one custom-condition call.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="820322276%2FClasslikes%2F526105075" anchor-label="CustomConditionRegistry" id="820322276%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-custom-condition-registry/index.html"><span>Custom</span><wbr></wbr><span>Condition</span><wbr></wbr><span><span>Registry</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="820322276%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-custom-condition-registry/index.html">CustomConditionRegistry</a></div><div class="brief "><p class="paragraph">Immutable explicit or factory-backed custom-condition resolver bound once to an <a href="-interpreter/index.html">Interpreter</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1793870512%2FClasslikes%2F526105075" anchor-label="CustomFieldTypeFactory" id="-1793870512%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-custom-field-type-factory/index.html"><span>Custom</span><wbr></wbr><span>Field</span><wbr></wbr><span>Type</span><wbr></wbr><span><span>Factory</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1793870512%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token keyword">interface </span><a href="-custom-field-type-factory/index.html">CustomFieldTypeFactory</a></div><div class="brief "><p class="paragraph">Name-resolving source of custom field validators; <code class="lang-kotlin">null</code> means unsupported.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1550115019%2FClasslikes%2F526105075" anchor-label="CustomFieldTypeRegistry" id="1550115019%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-custom-field-type-registry/index.html"><span>Custom</span><wbr></wbr><span>Field</span><wbr></wbr><span>Type</span><wbr></wbr><span><span>Registry</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1550115019%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-custom-field-type-registry/index.html">CustomFieldTypeRegistry</a></div><div class="brief "><p class="paragraph">Immutable explicit or factory-backed custom-field resolver bound once to an <a href="-interpreter/index.html">Interpreter</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="67231647%2FClasslikes%2F526105075" anchor-label="CustomFieldValidationParameters" id="67231647%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-custom-field-validation-parameters/index.html"><span>Custom</span><wbr></wbr><span>Field</span><wbr></wbr><span>Validation</span><wbr></wbr><span><span>Parameters</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="67231647%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-custom-field-validation-parameters/index.html">CustomFieldValidationParameters</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>locale<span class="token operator">: </span><span data-unresolved-link="kotlin/String///PointingToDeclaration/">String</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>minLength<span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>maxLength<span class="token operator">: </span><span data-unresolved-link="kotlin/Int///PointingToDeclaration/">Int</span><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>isDisplayValue<span class="token operator">: </span><span data-unresolved-link="kotlin/Boolean///PointingToDeclaration/">Boolean</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Locale and effective declaration bounds supplied to one custom-field validation call.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="437646540%2FClasslikes%2F526105075" anchor-label="CustomFieldValidationResult" id="437646540%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-custom-field-validation-result/index.html"><span>Custom</span><wbr></wbr><span>Field</span><wbr></wbr><span>Validation</span><wbr></wbr><span><span>Result</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="437646540%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">sealed </span><span class="token keyword">interface </span><a href="-custom-field-validation-result/index.html">CustomFieldValidationResult</a></div><div class="brief "><p class="paragraph">Allocation-free accepting or structured rejecting result of a custom field validator.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1535928430%2FClasslikes%2F526105075" anchor-label="CustomFieldValidator" id="1535928430%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-custom-field-validator/index.html"><span>Custom</span><wbr></wbr><span>Field</span><wbr></wbr><span><span>Validator</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1535928430%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token keyword">interface </span><a href="-custom-field-validator/index.html">CustomFieldValidator</a></div><div class="brief "><p class="paragraph">Synchronous code-based custom-field validation SPI.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-303525788%2FClasslikes%2F526105075" anchor-label="CustomizationKind" id="-303525788%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-customization-kind/index.html"><span>Customization</span><wbr></wbr><span><span>Kind</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-303525788%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-customization-kind/index.html">CustomizationKind</a> : <span data-unresolved-link="kotlin/Enum///PointingToDeclaration/">Enum</span><span class="token operator">&lt;</span><a href="-customization-kind/index.html">CustomizationKind</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Customization registry involved in a registration failure.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1633930331%2FClasslikes%2F526105075" anchor-label="CustomizationRegistrationError" id="1633930331%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-customization-registration-error/index.html"><span>Customization</span><wbr></wbr><span>Registration</span><wbr></wbr><span><span>Error</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1633930331%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-customization-registration-error/index.html">CustomizationRegistrationError</a> : <span data-unresolved-link="kotlin/IllegalArgumentException///PointingToDeclaration/">IllegalArgumentException</span></div><div class="brief "><p class="paragraph">An explicit customization registry contains an empty or duplicate name.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="487690107%2FClasslikes%2F526105075" anchor-label="CustomizationRegistrationReason" id="487690107%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-customization-registration-reason/index.html"><span>Customization</span><wbr></wbr><span>Registration</span><wbr></wbr><span><span>Reason</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="487690107%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-customization-registration-reason/index.html">CustomizationRegistrationReason</a> : <span data-unresolved-link="kotlin/Enum///PointingToDeclaration/">Enum</span><span class="token operator">&lt;</span><a href="-customization-registration-reason/index.html">CustomizationRegistrationReason</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Stable reason why an explicit customization registration was refused.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1039042090%2FClasslikes%2F526105075" anchor-label="DocumentCoordinateError" id="-1039042090%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-document-coordinate-error/index.html"><span>Document</span><wbr></wbr><span>Coordinate</span><wbr></wbr><span><span>Error</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1039042090%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-document-coordinate-error/index.html">DocumentCoordinateError</a> : <span data-unresolved-link="kotlin/RuntimeException///PointingToDeclaration/">RuntimeException</span></div><div class="brief "><p class="paragraph">A concrete or relevance pointer carries invalid coordinates. Group coordinates above declared bounds remain representable for formal validation; this error covers address shape, not repetition-limit validation.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-770076320%2FClasslikes%2F526105075" anchor-label="DocumentCoordinateReason" id="-770076320%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-document-coordinate-reason/index.html"><span>Document</span><wbr></wbr><span>Coordinate</span><wbr></wbr><span><span>Reason</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-770076320%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-document-coordinate-reason/index.html">DocumentCoordinateReason</a> : <span data-unresolved-link="kotlin/Enum///PointingToDeclaration/">Enum</span><span class="token operator">&lt;</span><a href="-document-coordinate-reason/index.html">DocumentCoordinateReason</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Stable reason why a concrete model address cannot be constructed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-742309802%2FClasslikes%2F526105075" anchor-label="DocumentDecodeLimits" id="-742309802%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-document-decode-limits/index.html"><span>Document</span><wbr></wbr><span>Decode</span><wbr></wbr><span><span>Limits</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-742309802%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-document-decode-limits/index.html">DocumentDecodeLimits</a></div><div class="brief "><p class="paragraph">Resource bounds for Document decoding. Caller values are capped by the hard implementation maxima so an API consumer cannot accidentally disable the browser-safe denial-of-service guards.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2142612596%2FClasslikes%2F526105075" anchor-label="DocumentEncodeError" id="2142612596%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-document-encode-error/index.html"><span>Document</span><wbr></wbr><span>Encode</span><wbr></wbr><span><span>Error</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2142612596%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-document-encode-error/index.html">DocumentEncodeError</a> : <span data-unresolved-link="kotlin/RuntimeException///PointingToDeclaration/">RuntimeException</span></div><div class="brief "><p class="paragraph">The document holds state A12 Document JSON has no shape for, so encoding would silently lose it. The one reachable case is a <strong>non-repeatable group row above 1</strong>: A12's reader accepts an array at any group (so such a row stays readable, and formal validation reports it), while A12's writer emits a non-repeatable group as a single object. <code class="lang-kotlin">pointer</code> is the canonical A12 pointer of the offending row.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1517215061%2FClasslikes%2F526105075" anchor-label="DocumentInputDiagnostic" id="1517215061%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-document-input-diagnostic/index.html"><span>Document</span><wbr></wbr><span>Input</span><wbr></wbr><span><span>Diagnostic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1517215061%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-document-input-diagnostic/index.html">DocumentInputDiagnostic</a></div><div class="brief "><p class="paragraph">One structured Document-input failure. Only properties meaningful for <a href="-document-input-diagnostic/reason-code.html">reasonCode</a> are populated; <a href="-document-input-diagnostic/message.html">message</a> is presentation text and is never the sole carrier of corrective data. <a href="-document-input-diagnostic/pointer.html">pointer</a> is the canonical A12 <code class="lang-kotlin">DocumentPointer</code> string of the offending position (<a href="-a12-pointer-format/index.html">A12PointerFormat</a>), so a caller can address the defect in the same form the document itself uses.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-795120290%2FClasslikes%2F526105075" anchor-label="DocumentInputError" id="-795120290%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-document-input-error/index.html"><span>Document</span><wbr></wbr><span>Input</span><wbr></wbr><span><span>Error</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-795120290%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-document-input-error/index.html">DocumentInputError</a> : <span data-unresolved-link="kotlin/RuntimeException///PointingToDeclaration/">RuntimeException</span></div><div class="brief "><p class="paragraph">Aggregate Document-input failure; thrown before any document state is constructed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-296306197%2FClasslikes%2F526105075" anchor-label="DocumentInputReasonCode" id="-296306197%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-document-input-reason-code/index.html"><span>Document</span><wbr></wbr><span>Input</span><wbr></wbr><span>Reason</span><wbr></wbr><span><span>Code</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-296306197%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-document-input-reason-code/index.html">DocumentInputReasonCode</a> : <span data-unresolved-link="kotlin/Enum///PointingToDeclaration/">Enum</span><span class="token operator">&lt;</span><a href="-document-input-reason-code/index.html">DocumentInputReasonCode</a><span class="token operator">&gt; </span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2136431218%2FClasslikes%2F526105075" anchor-label="DocumentInputResource" id="-2136431218%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-document-input-resource/index.html"><span>Document</span><wbr></wbr><span>Input</span><wbr></wbr><span><span>Resource</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2136431218%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-document-input-resource/index.html">DocumentInputResource</a> : <span data-unresolved-link="kotlin/Enum///PointingToDeclaration/">Enum</span><span class="token operator">&lt;</span><a href="-document-input-resource/index.html">DocumentInputResource</a><span class="token operator">&gt; </span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1279047592%2FClasslikes%2F526105075" anchor-label="DocumentJsonNodeType" id="-1279047592%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-document-json-node-type/index.html"><span>Document</span><wbr></wbr><span>Json</span><wbr></wbr><span>Node</span><wbr></wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1279047592%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-document-json-node-type/index.html">DocumentJsonNodeType</a> : <span data-unresolved-link="kotlin/Enum///PointingToDeclaration/">Enum</span><span class="token operator">&lt;</span><a href="-document-json-node-type/index.html">DocumentJsonNodeType</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">What a JSON node at one document position actually is, when the model expected something else.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1933408087%2FClasslikes%2F526105075" anchor-label="DocumentPointer" id="-1933408087%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-document-pointer/index.html"><span>Document</span><wbr></wbr><span><span>Pointer</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1933408087%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">sealed </span><span class="token keyword">interface </span><a href="-document-pointer/index.html">DocumentPointer</a> : <a href="-relevant-entity-pointer/index.html">RelevantEntityPointer</a></div><div class="brief "><p class="paragraph">One exact model-owned group row or field cell.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1361847672%2FClasslikes%2F526105075" anchor-label="DocumentSnapshot" id="1361847672%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-document-snapshot/index.html"><span>Document</span><wbr></wbr><span><span>Snapshot</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1361847672%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-document-snapshot/index.html">DocumentSnapshot</a> : <a href="-model-owned/index.html">ModelOwned</a></div><div class="brief "><p class="paragraph">One frozen, model-owned document instance. It exposes no storage mutation or evaluation surface; the encode verb on its owning <a href="-prepared-model/documents.html">PreparedModel.documents</a> is the read-back. <code class="lang-kotlin">documentId</code> is A12's root-level <code class="lang-kotlin">id</code> — a serializer special case rather than a model field, so it takes no part in evaluation.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1606609172%2FClasslikes%2F526105075" anchor-label="FieldPointer" id="1606609172%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-field-pointer/index.html"><span>Field</span><wbr></wbr><span><span>Pointer</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1606609172%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-field-pointer/index.html">FieldPointer</a> : <a href="-document-pointer/index.html">DocumentPointer</a></div><div class="brief "><p class="paragraph">Exact model-owned field-cell pointer produced by <a href="-model-metadata/pointer.html">ModelMetadata.pointer</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1705645415%2FClasslikes%2F526105075" anchor-label="GroupPointer" id="-1705645415%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-group-pointer/index.html"><span>Group</span><wbr></wbr><span><span>Pointer</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1705645415%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-group-pointer/index.html">GroupPointer</a> : <a href="-document-pointer/index.html">DocumentPointer</a></div><div class="brief "><p class="paragraph">Exact model-owned group-row pointer produced by <a href="-model-metadata/pointer.html">ModelMetadata.pointer</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1546793681%2FClasslikes%2F526105075" anchor-label="Interpreter" id="1546793681%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-interpreter/index.html"><span><span>Interpreter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1546793681%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-interpreter/index.html">Interpreter</a> : <a href="-model-owned/index.html">ModelOwned</a></div><div class="brief "><p class="paragraph">One owner-bound active evaluator. It reuses one prepared engine, accepts only snapshots/pointers from its <a href="-prepared-model/index.html">PreparedModel</a>, and returns detached support, validation, and computation records.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1992338053%2FClasslikes%2F526105075" anchor-label="InterpreterConfiguration" id="-1992338053%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-interpreter-configuration/index.html"><span>Interpreter</span><wbr></wbr><span><span>Configuration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1992338053%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-interpreter-configuration/index.html">InterpreterConfiguration</a></div><div class="brief "><p class="paragraph">Customization inputs used to create one active <a href="-interpreter/index.html">Interpreter</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-780685155%2FClasslikes%2F526105075" anchor-label="InterpreterIntegrationError" id="-780685155%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-interpreter-integration-error/index.html"><span>Interpreter</span><wbr></wbr><span>Integration</span><wbr></wbr><span><span>Error</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-780685155%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-interpreter-integration-error/index.html">InterpreterIntegrationError</a> : <span data-unresolved-link="kotlin/RuntimeException///PointingToDeclaration/">RuntimeException</span></div><div class="brief "><p class="paragraph">Typed boundary error for host factory/callback failures and same-lane reentry.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="186495114%2FClasslikes%2F526105075" anchor-label="InterpreterIntegrationPhase" id="186495114%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-interpreter-integration-phase/index.html"><span>Interpreter</span><wbr></wbr><span>Integration</span><wbr></wbr><span><span>Phase</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="186495114%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-interpreter-integration-phase/index.html">InterpreterIntegrationPhase</a> : <span data-unresolved-link="kotlin/Enum///PointingToDeclaration/">Enum</span><span class="token operator">&lt;</span><a href="-interpreter-integration-phase/index.html">InterpreterIntegrationPhase</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Lifecycle phase in which a host factory or callback failed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1350945927%2FClasslikes%2F526105075" anchor-label="InterpreterIntegrationReason" id="-1350945927%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-interpreter-integration-reason/index.html"><span>Interpreter</span><wbr></wbr><span>Integration</span><wbr></wbr><span><span>Reason</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1350945927%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-interpreter-integration-reason/index.html">InterpreterIntegrationReason</a> : <span data-unresolved-link="kotlin/Enum///PointingToDeclaration/">Enum</span><span class="token operator">&lt;</span><a href="-interpreter-integration-reason/index.html">InterpreterIntegrationReason</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Stable classification of a host integration failure.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1819071790%2FClasslikes%2F526105075" anchor-label="InterpreterSupportReport" id="1819071790%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-interpreter-support-report/index.html"><span>Interpreter</span><wbr></wbr><span>Support</span><wbr></wbr><span><span>Report</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1819071790%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-interpreter-support-report/index.html">InterpreterSupportReport</a></div><div class="brief "><p class="paragraph">Document-independent support audit for one prepared model and one bound customization configuration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="403790648%2FClasslikes%2F1742803875" anchor-label="JavaModelSourceProvider" id="403790648%2FClasslikes%2F1742803875" data-filterable-set=":interpreter/jvmMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/jvmMain" data-filterable-set=":interpreter/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-java-model-source-provider/index.html"><span>Java</span><wbr></wbr><span>Model</span><wbr></wbr><span>Source</span><wbr></wbr><span><span>Provider</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="403790648%2FClasslikes%2F1742803875"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":interpreter/jvmMain" data-filterable-set=":interpreter/jvmMain" data-active="" data-toggle=":interpreter/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/jvmMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token keyword">interface </span><a href="-java-model-source-provider/index.html">JavaModelSourceProvider</a></div><div class="brief "><p class="paragraph">Java acquisition port for the common collector. One provider instance represents one logical source snapshot; returning <code class="lang-kotlin">null</code> means that the requested exact model id does not exist.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2092981820%2FClasslikes%2F526105075" anchor-label="ModelCollectionSignal" id="2092981820%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-model-collection-signal/index.html"><span>Model</span><wbr></wbr><span>Collection</span><wbr></wbr><span><span>Signal</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2092981820%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-model-collection-signal/index.html">ModelCollectionSignal</a></div><div class="brief "><p class="paragraph">Portable cancellation state shared with the provider and checked between exact-id loads.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2059425225%2FClasslikes%2F526105075" anchor-label="ModelDependency" id="-2059425225%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-model-dependency/index.html"><span>Model</span><wbr></wbr><span><span>Dependency</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2059425225%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-model-dependency/index.html">ModelDependency</a></div><div class="brief "><p class="paragraph">One distinct resolved preparation edge and the digest of the exact source bytes that satisfied it.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="527077611%2FClasslikes%2F526105075" anchor-label="ModelEntityKind" id="527077611%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-model-entity-kind/index.html"><span>Model</span><wbr></wbr><span>Entity</span><wbr></wbr><span><span>Kind</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="527077611%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-model-entity-kind/index.html">ModelEntityKind</a> : <span data-unresolved-link="kotlin/Enum///PointingToDeclaration/">Enum</span><span class="token operator">&lt;</span><a href="-model-entity-kind/index.html">ModelEntityKind</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Whether a model-owned pointer addresses a declared group row or field cell.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="192302500%2FClasslikes%2F526105075" anchor-label="ModelExpansionResult" id="192302500%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-model-expansion-result/index.html"><span>Model</span><wbr></wbr><span>Expansion</span><wbr></wbr><span><span>Result</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="192302500%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">sealed </span><span class="token keyword">interface </span><a href="-model-expansion-result/index.html">ModelExpansionResult</a></div><div class="brief "><p class="paragraph">Non-throwing result of assembler-only expanded DM-JSON generation.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1655796499%2FClasslikes%2F526105075" anchor-label="ModelMetadata" id="1655796499%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-model-metadata/index.html"><span>Model</span><wbr></wbr><span><span>Metadata</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1655796499%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-model-metadata/index.html">ModelMetadata</a> : <a href="-model-owned/index.html">ModelOwned</a></div><div class="brief "><p class="paragraph">Minimal model-owned metadata boundary for exact and partial-relevance pointer construction. Rich declaration navigation remains outside the first interpreter release increment.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="419542939%2FClasslikes%2F526105075" anchor-label="ModelOwned" id="419542939%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-model-owned/index.html"><span>Model</span><wbr></wbr><span><span>Owned</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="419542939%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-model-owned/index.html">ModelOwned</a></div><div class="brief "><p class="paragraph">Common ownership contract for model-bound runtime values.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1309857745%2FClasslikes%2F526105075" anchor-label="ModelOwnerIdentity" id="-1309857745%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-model-owner-identity/index.html"><span>Model</span><wbr></wbr><span>Owner</span><wbr></wbr><span><span>Identity</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1309857745%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-model-owner-identity/index.html">ModelOwnerIdentity</a></div><div class="brief "><p class="paragraph">Opaque process- or Worker-local authenticity domain for objects created by one <a href="-prepared-model/index.html">PreparedModel</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2080404709%2FClasslikes%2F526105075" anchor-label="ModelOwnerMismatchError" id="-2080404709%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-model-owner-mismatch-error/index.html"><span>Model</span><wbr></wbr><span>Owner</span><wbr></wbr><span>Mismatch</span><wbr></wbr><span><span>Error</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2080404709%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-model-owner-mismatch-error/index.html">ModelOwnerMismatchError</a> : <span data-unresolved-link="kotlin/RuntimeException///PointingToDeclaration/">RuntimeException</span></div><div class="brief "><p class="paragraph">A model-owned runtime object reached an API belonging to a different prepared owner domain — a foreign model, or a stale snapshot of an earlier preparation of the same sources. <code class="lang-kotlin">expected</code> and <code class="lang-kotlin">actual</code> are opaque correlation identities, never model content.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1852622654%2FClasslikes%2F526105075" anchor-label="ModelPreparationDiagnostic" id="-1852622654%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-model-preparation-diagnostic/index.html"><span>Model</span><wbr></wbr><span>Preparation</span><wbr></wbr><span><span>Diagnostic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1852622654%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-model-preparation-diagnostic/index.html">ModelPreparationDiagnostic</a></div><div class="brief "><p class="paragraph">One structured preparation failure. Only properties meaningful for <a href="-model-preparation-diagnostic/code.html">code</a> are populated; <a href="-model-preparation-diagnostic/message.html">message</a> is presentation text and is never the sole carrier of corrective data exposed by this contract.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1329651413%2FClasslikes%2F526105075" anchor-label="ModelPreparationDiagnosticCode" id="1329651413%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-model-preparation-diagnostic-code/index.html"><span>Model</span><wbr></wbr><span>Preparation</span><wbr></wbr><span>Diagnostic</span><wbr></wbr><span><span>Code</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1329651413%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-model-preparation-diagnostic-code/index.html">ModelPreparationDiagnosticCode</a> : <span data-unresolved-link="kotlin/Enum///PointingToDeclaration/">Enum</span><span class="token operator">&lt;</span><a href="-model-preparation-diagnostic-code/index.html">ModelPreparationDiagnosticCode</a><span class="token operator">&gt; </span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1803755055%2FClasslikes%2F526105075" anchor-label="ModelPreparationError" id="-1803755055%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-model-preparation-error/index.html"><span>Model</span><wbr></wbr><span>Preparation</span><wbr></wbr><span><span>Error</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1803755055%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-model-preparation-error/index.html">ModelPreparationError</a> : <span data-unresolved-link="kotlin/RuntimeException///PointingToDeclaration/">RuntimeException</span></div><div class="brief "><p class="paragraph">Aggregate failure for source admission or model preparation.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2118023823%2FClasslikes%2F526105075" anchor-label="ModelPreparationLimits" id="-2118023823%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-model-preparation-limits/index.html"><span>Model</span><wbr></wbr><span>Preparation</span><wbr></wbr><span><span>Limits</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2118023823%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-model-preparation-limits/index.html">ModelPreparationLimits</a></div><div class="brief "><p class="paragraph">Resource bounds for source admission and deterministic preparation. Caller values are capped by the hard implementation maxima so an API consumer cannot accidentally disable the browser-safe denial-of-service guards.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1511454779%2FClasslikes%2F526105075" anchor-label="ModelPreparationResource" id="1511454779%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-model-preparation-resource/index.html"><span>Model</span><wbr></wbr><span>Preparation</span><wbr></wbr><span><span>Resource</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1511454779%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-model-preparation-resource/index.html">ModelPreparationResource</a> : <span data-unresolved-link="kotlin/Enum///PointingToDeclaration/">Enum</span><span class="token operator">&lt;</span><a href="-model-preparation-resource/index.html">ModelPreparationResource</a><span class="token operator">&gt; </span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1971325196%2FClasslikes%2F526105075" anchor-label="ModelPreparationResult" id="1971325196%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-model-preparation-result/index.html"><span>Model</span><wbr></wbr><span>Preparation</span><wbr></wbr><span><span>Result</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1971325196%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">sealed </span><span class="token keyword">interface </span><a href="-model-preparation-result/index.html">ModelPreparationResult</a></div><div class="brief "><p class="paragraph">Non-throwing result of preparing one model for evaluation.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1344946799%2FClasslikes%2F526105075" anchor-label="ModelReferencePurpose" id="1344946799%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-model-reference-purpose/index.html"><span>Model</span><wbr></wbr><span>Reference</span><wbr></wbr><span><span>Purpose</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1344946799%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-model-reference-purpose/index.html">ModelReferencePurpose</a> : <span data-unresolved-link="kotlin/Enum///PointingToDeclaration/">Enum</span><span class="token operator">&lt;</span><a href="-model-reference-purpose/index.html">ModelReferencePurpose</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">The role of one directed edge in the raw-model preparation closure.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1359005385%2FClasslikes%2F526105075" anchor-label="ModelReferenceStep" id="1359005385%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-model-reference-step/index.html"><span>Model</span><wbr></wbr><span>Reference</span><wbr></wbr><span><span>Step</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1359005385%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-model-reference-step/index.html">ModelReferenceStep</a></div><div class="brief "><p class="paragraph">One exact directed edge traversed while preparing a workspace closure.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="545472786%2FClasslikes%2F526105075" anchor-label="ModelSourceLoadContext" id="545472786%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-model-source-load-context/index.html"><span>Model</span><wbr></wbr><span>Source</span><wbr></wbr><span>Load</span><wbr></wbr><span><span>Context</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="545472786%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-model-source-load-context/index.html">ModelSourceLoadContext</a></div><div class="brief "><p class="paragraph">Effective acquisition ceiling and cancellation state for one provider call.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1551860982%2FClasslikes%2F526105075" anchor-label="ModelSourceProvider" id="1551860982%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-model-source-provider/index.html"><span>Model</span><wbr></wbr><span>Source</span><wbr></wbr><span><span>Provider</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1551860982%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-model-source-provider/index.html">ModelSourceProvider</a></div><div class="brief "><p class="paragraph">Snapshot-scoped host port that resolves one exact logical model id without exposing storage machinery. <a href="-model-source-provider/snapshot-revision.html">snapshotRevision</a> is optional provenance and is retained only when it is a safe logical label.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1448268380%2FClasslikes%2F526105075" anchor-label="ModelSourceProviderError" id="-1448268380%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-model-source-provider-error/index.html"><span>Model</span><wbr></wbr><span>Source</span><wbr></wbr><span>Provider</span><wbr></wbr><span><span>Error</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1448268380%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-model-source-provider-error/index.html">ModelSourceProviderError</a> : <span data-unresolved-link="kotlin/RuntimeException///PointingToDeclaration/">RuntimeException</span></div><div class="brief "><p class="paragraph">Typed provider-owned acquisition failure. Collection retains only its stable reason and cause.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1846783234%2FClasslikes%2F526105075" anchor-label="ModelSourceProviderFailureReason" id="-1846783234%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-model-source-provider-failure-reason/index.html"><span>Model</span><wbr></wbr><span>Source</span><wbr></wbr><span>Provider</span><wbr></wbr><span>Failure</span><wbr></wbr><span><span>Reason</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1846783234%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-model-source-provider-failure-reason/index.html">ModelSourceProviderFailureReason</a> : <span data-unresolved-link="kotlin/Enum///PointingToDeclaration/">Enum</span><span class="token operator">&lt;</span><a href="-model-source-provider-failure-reason/index.html">ModelSourceProviderFailureReason</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Stable reason supplied by a provider that cannot return one requested source.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1517422870%2FClasslikes%2F526105075" anchor-label="ModelVersionIdentity" id="-1517422870%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-model-version-identity/index.html"><span>Model</span><wbr></wbr><span>Version</span><wbr></wbr><span><span>Identity</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1517422870%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-model-version-identity/index.html">ModelVersionIdentity</a></div><div class="brief "><p class="paragraph">Opaque process- or Worker-local identity for one independently prepared model version.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-334365653%2FClasslikes%2F526105075" anchor-label="ModelWorkspace" id="-334365653%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-model-workspace/index.html"><span>Model</span><wbr></wbr><span><span>Workspace</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-334365653%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-model-workspace/index.html">ModelWorkspace</a></div><div class="brief "><p class="paragraph">Immutable exact-id workspace produced from a finite or provider-collected source set. Construction admits and freezes every supplied source; <a href="-model-workspace/prepare.html">prepare</a> resolves only the requested entry's transitive closure.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-226722007%2FClasslikes%2F1742803875" anchor-label="ModelWorkspaceJava" id="-226722007%2FClasslikes%2F1742803875" data-filterable-set=":interpreter/jvmMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/jvmMain" data-filterable-set=":interpreter/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-model-workspace-java/index.html"><span>Model</span><wbr></wbr><span>Workspace</span><wbr></wbr><span><span>Java</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-226722007%2FClasslikes%2F1742803875"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":interpreter/jvmMain" data-filterable-set=":interpreter/jvmMain" data-active="" data-toggle=":interpreter/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/jvmMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-model-workspace-java/index.html">ModelWorkspaceJava</a></div><div class="brief "><p class="paragraph">Java-only asynchronous projection over the single common workspace collector.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1237661129%2FClasslikes%2F526105075" anchor-label="PreparedDocumentApi" id="1237661129%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-prepared-document-api/index.html"><span>Prepared</span><wbr></wbr><span>Document</span><wbr></wbr><span><span>Api</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1237661129%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-prepared-document-api/index.html">PreparedDocumentApi</a></div><div class="brief "><p class="paragraph">The Document transport of one <a href="-prepared-model/index.html">PreparedModel</a>, speaking <strong>A12's canonical Document JSON</strong> on both sides. <a href="-prepared-document-api/read-document.html">readDocument</a> validates the complete text — parseability, resource limits, model paths, and node types — and only then constructs the snapshot, so a failing input mutates nothing. <a href="-prepared-document-api/seed-document.html">seedDocument</a> creates the deterministic, complete model-shaped candidate also exposed by <code class="lang-kotlin">dmtool model seed</code>. <a href="-prepared-document-api/encode-document.html">encodeDocument</a> is the owner-checked read-back: every row, empty cell, and unconverted raw value survives it, and one encode reaches the canonical fixed point.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="644844063%2FClasslikes%2F526105075" anchor-label="PreparedModel" id="644844063%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-prepared-model/index.html"><span>Prepared</span><wbr></wbr><span><span>Model</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="644844063%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-prepared-model/index.html">PreparedModel</a> : <a href="-model-owned/index.html">ModelOwned</a></div><div class="brief "><p class="paragraph">One model-static prepared owner domain. It contains no request document, clock, callback, registry, provider, filesystem handle, or request-scoped state.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="109416642%2FClasslikes%2F526105075" anchor-label="RelevantCoordinate" id="109416642%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-relevant-coordinate/index.html"><span>Relevant</span><wbr></wbr><span><span>Coordinate</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="109416642%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">sealed </span><span class="token keyword">interface </span><a href="-relevant-coordinate/index.html">RelevantCoordinate</a></div><div class="brief "><p class="paragraph">One coordinate of a partial-validation selection: one exact row or every repetition at that level.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1642946322%2FClasslikes%2F526105075" anchor-label="RelevantEntityPointer" id="-1642946322%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-relevant-entity-pointer/index.html"><span>Relevant</span><wbr></wbr><span>Entity</span><wbr></wbr><span><span>Pointer</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1642946322%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">sealed </span><span class="token keyword">interface </span><a href="-relevant-entity-pointer/index.html">RelevantEntityPointer</a> : <a href="-model-owned/index.html">ModelOwned</a></div><div class="brief "><p class="paragraph">Model-owned field/group selection accepted by partial validation.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-455583095%2FClasslikes%2F526105075" anchor-label="RelevantSelectionPointer" id="-455583095%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-relevant-selection-pointer/index.html"><span>Relevant</span><wbr></wbr><span>Selection</span><wbr></wbr><span><span>Pointer</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-455583095%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-relevant-selection-pointer/index.html">RelevantSelectionPointer</a> : <a href="-relevant-entity-pointer/index.html">RelevantEntityPointer</a></div><div class="brief "><p class="paragraph">Partial-validation selection containing at least one <a href="-relevant-coordinate/-all/index.html">RelevantCoordinate.All</a> coordinate.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2036983143%2FClasslikes%2F526105075" anchor-label="UnknownModelPathError" id="2036983143%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-unknown-model-path-error/index.html"><span>Unknown</span><wbr></wbr><span>Model</span><wbr></wbr><span>Path</span><wbr></wbr><span><span>Error</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2036983143%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-unknown-model-path-error/index.html">UnknownModelPathError</a> : <span data-unresolved-link="kotlin/RuntimeException///PointingToDeclaration/">RuntimeException</span></div><div class="brief "><p class="paragraph">A lookup requested a path that names no declared field or group.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="216319848%2FClasslikes%2F526105075" anchor-label="UnsupportedProgram" id="216319848%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-unsupported-program/index.html"><span>Unsupported</span><wbr></wbr><span><span>Program</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="216319848%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-unsupported-program/index.html">UnsupportedProgram</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>path<span class="token operator">: </span><span data-unresolved-link="kotlin/String///PointingToDeclaration/">String</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>reason<span class="token operator">: </span><span data-unresolved-link="kotlin/String///PointingToDeclaration/">String</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>subject<span class="token operator">: </span><a href="-unsupported-program-subject/index.html">UnsupportedProgramSubject</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">One construct the configured interpreter cannot evaluate — a stored rule, an implicit rule, a computation, a field declaration whose custom type is unregistered, or a single document cell.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1235156594%2FClasslikes%2F526105075" anchor-label="UnsupportedProgramSubject" id="-1235156594%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-unsupported-program-subject/index.html"><span>Unsupported</span><wbr></wbr><span>Program</span><wbr></wbr><span><span>Subject</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1235156594%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-unsupported-program-subject/index.html">UnsupportedProgramSubject</a> : <span data-unresolved-link="kotlin/Enum///PointingToDeclaration/">Enum</span><span class="token operator">&lt;</span><a href="-unsupported-program-subject/index.html">UnsupportedProgramSubject</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">What kind of address an <a href="-unsupported-program/path.html">UnsupportedProgram.path</a> carries — the two are not interchangeable.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-538039877%2FClasslikes%2F526105075" anchor-label="ValidationFinding" id="-538039877%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-validation-finding/index.html"><span>Validation</span><wbr></wbr><span><span>Finding</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-538039877%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-validation-finding/index.html">ValidationFinding</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>code<span class="token operator">: </span><span data-unresolved-link="kotlin/String///PointingToDeclaration/">String</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>rulePath<span class="token operator">: </span><span data-unresolved-link="kotlin/String///PointingToDeclaration/">String</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>errorPath<span class="token operator">: </span><a href="-a12-partially-known-multi-pointer/index.html">A12PartiallyKnownMultiPointer</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>severity<span class="token operator">: </span><a href="-validation-severity/index.html">ValidationSeverity</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>type<span class="token operator">: </span><a href="-validation-finding-type/index.html">ValidationFindingType</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>text<span class="token operator">: </span><span data-unresolved-link="kotlin/String///PointingToDeclaration/">String</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>referenced<span class="token operator">: </span><span data-unresolved-link="kotlin.collections/List///PointingToDeclaration/">List</span><span class="token operator">&lt;</span><a href="-a12-partially-known-multi-pointer/index.html">A12PartiallyKnownMultiPointer</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>fillToFix<span class="token operator">: </span><span data-unresolved-link="kotlin.collections/List///PointingToDeclaration/">List</span><span class="token operator">&lt;</span><a href="-a12-partially-known-multi-pointer/index.html">A12PartiallyKnownMultiPointer</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Detached, kernel-free projection of one validation finding.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-90314079%2FClasslikes%2F526105075" anchor-label="ValidationFindingType" id="-90314079%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-validation-finding-type/index.html"><span>Validation</span><wbr></wbr><span>Finding</span><wbr></wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-90314079%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-validation-finding-type/index.html">ValidationFindingType</a> : <span data-unresolved-link="kotlin/Enum///PointingToDeclaration/">Enum</span><span class="token operator">&lt;</span><a href="-validation-finding-type/index.html">ValidationFindingType</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Whether a firing reports an invalid supplied value or a required omission.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2129836502%2FClasslikes%2F526105075" anchor-label="ValidationReport" id="-2129836502%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-validation-report/index.html"><span>Validation</span><wbr></wbr><span><span>Report</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2129836502%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-validation-report/index.html">ValidationReport</a></div><div class="brief "><p class="paragraph">Detached full/partial-validation report with independent finding and support axes.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1206422207%2FClasslikes%2F526105075" anchor-label="ValidationSeverity" id="-1206422207%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-validation-severity/index.html"><span>Validation</span><wbr></wbr><span><span>Severity</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1206422207%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-validation-severity/index.html">ValidationSeverity</a> : <span data-unresolved-link="kotlin/Enum///PointingToDeclaration/">Enum</span><span class="token operator">&lt;</span><a href="-validation-severity/index.html">ValidationSeverity</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">UI severity of one validation finding; only <a href="-validation-severity/-e-r-r-o-r/index.html">ERROR</a> makes <code class="lang-kotlin">noErrorOccurred</code> false.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1287242664%2FClasslikes%2F526105075" anchor-label="WorkspaceModelSource" id="1287242664%2FClasslikes%2F526105075" data-filterable-set=":interpreter/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":interpreter/commonMain" data-filterable-set=":interpreter/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-workspace-model-source/index.html"><span>Workspace</span><wbr></wbr><span>Model</span><wbr></wbr><span><span>Source</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1287242664%2FClasslikes%2F526105075"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-workspace-model-source/index.html">WorkspaceModelSource</a></div><div class="brief "><p class="paragraph">One immutable raw DM-JSON source supplied to <a href="-model-workspace/index.html">ModelWorkspace</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>A12 Interpreter 0.13.0 · MIT License</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

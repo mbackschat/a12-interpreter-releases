@@ -1,0 +1,34 @@
+{
+    "meta": {
+        "id": "having-quantifier-fired-omission",
+        "kernelVersion": "30.8.1",
+        "source": "curated",
+        "sections": [
+            "§9",
+            "§12"
+        ],
+        "tags": [
+            "having",
+            "polarity"
+        ],
+        "notes": "a fired fill quantifier over a Having-filtered star is UNCONDITIONALLY OMISSION (the escalation, IF101) — even over a fully-kept FILLED row, where an unfiltered quantifier would type VALUE"
+    },
+    "modelRef": "models/order-light-present.json",
+    "document": {
+        "Order": {
+            "Items": [
+                {
+                    "Count": 5,
+                    "Sku": "A",
+                    "UnitWeight": 1.0
+                }
+            ]
+        }
+    },
+    "op": {
+        "kind": "validateFull"
+    },
+    "expected": [
+        "LIGHT_PRESENT|OMISSION_ERROR|/Order[1]/Items[1]/Count"
+    ]
+}

@@ -13,7 +13,7 @@ Use the built-in models and Documents or load your own local workspace. Your sel
 ## Documentation
 
 - 🚀 **[Try the live browser showcase →](https://mbackschat.github.io/a12-interpreter-releases/showcase/)**
-- 📘 **[Read the developer API guide →](https://github.com/mbackschat/a12-interpreter-releases/blob/v0.13.0/site/api/v0.13.0/INTERPRETER-API-GUIDE.md)**
+- 📘 **[Read the developer API guide →](https://github.com/mbackschat/a12-interpreter-releases/blob/v0.14.0/site/api/v0.14.0/INTERPRETER-API-GUIDE.md)**
 - 🧭 **[Browse the TypeScript API →](https://mbackschat.github.io/a12-interpreter-releases/api/latest/typescript/)**
 - 🧭 **[Browse the Kotlin API →](https://mbackschat.github.io/a12-interpreter-releases/api/latest/kotlin/)**
 - 🏠 **[Open the public release site →](https://mbackschat.github.io/a12-interpreter-releases/)** — current version, installation coordinates, showcase, API references, and privacy information
@@ -36,16 +36,41 @@ The package does not author models, render forms, persist Documents, provide a v
 
 **Semantics target.** This release reproduces the evaluation behavior of **A12 Kernel 30.8.1**, as shipped in the **A12 Tools 2025.06-ext5** distribution. The implementation is clean-room and is verified by differential testing against that kernel; the target version is stated so you can tell which kernel's semantics a given release was matched to.
 
+<p align="center">
+  <a href="assets/infographics/a12-interpreter-runtime.avif">
+    <img src="assets/infographics/a12-interpreter-runtime.avif" alt="A12 Interpreter preparation, reusable request lifecycle, outputs, and Kernel conformance evidence" width="720">
+  </a>
+</p>
+<p align="center"><sub>Click the infographic to open the full-resolution image.</sub></p>
+
+## How it fits the wider toolchain
+
+Kotlin Multiplatform lets this one evaluation engine serve JVM, Node.js, browser, and native dmtool consumers. GraalVM is the delivery mechanism for the separate dmtool executable, not the source of Interpreter semantics. The real A12 Kernel does not ship in this package; it remains the model-acceptance authority in dmtool and the external oracle for the differential tests that verify this clean-room implementation.
+
+<p align="center">
+  <a href="assets/infographics/kotlin-graalvm-kernel-roles.avif">
+    <img src="assets/infographics/kotlin-graalvm-kernel-roles.avif" alt="How Kotlin Multiplatform, GraalVM Native Image, and the A12 Kernel divide responsibilities around the A12 Interpreter" width="720">
+  </a>
+</p>
+<p align="center"><sub>Click the infographic to open the full-resolution image.</sub></p>
+
 ## Performance
 
 **[→ Performance and footprint](PERFORMANCE.md)** — what the package costs to ship, how fast it validates in the browser and on the JVM, what a resident model costs, and how each figure was measured.
+
+<p align="center">
+  <a href="assets/infographics/interpreter-vs-kernel.avif">
+    <img src="assets/infographics/interpreter-vs-kernel.avif" alt="Measured A12 Interpreter performance and resident memory compared with the A12 Kernel" width="720">
+  </a>
+</p>
+<p align="center"><sub>Click the infographic to open the full-resolution image.</sub></p>
 
 ## TypeScript and JavaScript
 
 Install the npm-compatible tarball directly from the GitHub Release:
 
 ```sh
-pnpm add https://github.com/mbackschat/a12-interpreter-releases/releases/download/v0.13.0/a12-interpreter-0.13.0.tgz
+pnpm add https://github.com/mbackschat/a12-interpreter-releases/releases/download/v0.14.0/a12-interpreter-0.14.0.tgz
 ```
 
 Documents are A12's own Document JSON — the shape the A12 Kernel serializes: a nested object tree, a repeating group as an array whose index is the repetition, native JSON for numbers and booleans.
@@ -105,7 +130,7 @@ repositories {
 }
 
 dependencies {
-    implementation("io.github.mbackschat.a12.dm:dm-interpreter:0.13.0")
+    implementation("io.github.mbackschat.a12.dm:dm-interpreter:0.14.0")
 }
 ```
 
@@ -180,7 +205,7 @@ Four things to know before sizing a cache:
   and no serialization, so only the expanded DM-JSON can live in a shared tier.
 
 The complete pattern — cache keying, single-flight loading, eviction safety, and the trade-offs — is in
-[the developer API guide](https://github.com/mbackschat/a12-interpreter-releases/blob/v0.13.0/site/api/v0.13.0/INTERPRETER-API-GUIDE.md).
+[the developer API guide](https://github.com/mbackschat/a12-interpreter-releases/blob/v0.14.0/site/api/v0.14.0/INTERPRETER-API-GUIDE.md).
 
 ## Compatibility and limits
 
@@ -191,25 +216,37 @@ The core is MIT-licensed and contains no Kernel bytecode or runtime dependency. 
 <!-- source-statistics:interpreter-release:start -->
 ## Source statistics
 
-Generated with [Tokei](https://github.com/XAMPPRocky/tokei) from the standalone interpreter library, TypeScript facade, and browser showcase. Tests, fixtures, generated output, build trees, and code embedded in Markdown are excluded.
+Generated with [Tokei](https://github.com/XAMPPRocky/tokei) from the standalone interpreter library, TypeScript facade, and browser showcase. Fixtures, generated output and build trees are excluded from every count.
 
-| Language | Files | Code | Comments | Blanks |
-|---|---:|---:|---:|---:|
-| Java | 0 | 0 | 0 | 0 |
-| Kotlin | 114 | 18703 | 7575 | 2367 |
-| TypeScript | 17 | 3209 | 274 | 279 |
+### Production
 
-Maintainers regenerate this table with the local statistics updater; both release publishers compare it with fresh counts before any public mutation.
+The shipped product. Counted from `interpreter/src/commonMain/kotlin`, `interpreter/src/jvmMain/kotlin`, `interpreter/src/jsMain/kotlin`, `interpreter/typescript/src`, `interpreter/consumer-tests/browser/src`.
+
+| Language | Files | Lines | Code | Comments | Blanks |
+|---|---:|---:|---:|---:|---:|
+| Kotlin | 143 | 34855 | 21943 | 9971 | 2941 |
+| TypeScript | 17 | 3794 | 3227 | 286 | 281 |
+
+### Verification
+
+Tests, laws, kernel differentials, fuzzers, conformance replay, and the external consumer programs compiled against the packed artifacts. Counted from `interpreter/src/commonTest/kotlin`, `interpreter/src/jvmTest/kotlin`, `interpreter/src/jsTest/kotlin`, `interpreter/consumer-tests/kotlin-jvm/src/main/kotlin`, `interpreter/consumer-tests/kotlin-js/src/jsMain/kotlin`, `interpreter/consumer-tests/typescript/src`, `interpreter/consumer-tests/browser/scripts`.
+
+| Language | Files | Lines | Code | Comments | Blanks |
+|---|---:|---:|---:|---:|---:|
+| Kotlin | 346 | 38009 | 29923 | 4020 | 4066 |
+| TypeScript | 15 | 3399 | 3178 | 75 | 146 |
+
+Maintainers regenerate these tables with the local statistics updater; both release publishers compare them with fresh counts before any public mutation.
 <!-- source-statistics:interpreter-release:end -->
 
 ## Release contents
 
 This release contains:
 
-- `a12-interpreter-0.13.0.tgz` — npm-compatible TypeScript/JavaScript package with the compiled browser/Node runtime, declarations, source maps, README, and license.
-- `dm-interpreter-0.13.0-maven-repository.zip` — complete offline Maven repository containing the Kotlin Multiplatform, JVM, and JS artifacts, Gradle metadata, POMs, documentation JARs, source JARs, and checksums.
-- `dm-interpreter-0.13.0-api-docs.zip` — versioned developer guide plus generated TypeScript and Kotlin API references for offline use or static hosting.
-- `dm-interpreter-0.13.0-showcase.zip` — deployable static browser showcase, including its built-in example workspaces, Documents, conformance data, and measured bundle metadata.
+- `a12-interpreter-0.14.0.tgz` — npm-compatible TypeScript/JavaScript package with the compiled browser/Node runtime, declarations, source maps, README, and license.
+- `dm-interpreter-0.14.0-maven-repository.zip` — complete offline Maven repository containing the Kotlin Multiplatform, JVM, and JS artifacts, Gradle metadata, POMs, documentation JARs, source JARs, and checksums.
+- `dm-interpreter-0.14.0-api-docs.zip` — versioned developer guide plus generated TypeScript and Kotlin API references for offline use or static hosting.
+- `dm-interpreter-0.14.0-showcase.zip` — deployable static browser showcase, including its built-in example workspaces, Documents, conformance data, and measured bundle metadata.
 - `release-manifest.json` — machine-readable release identity, source tag and commit, package coordinates, supported targets, artifact sizes, and SHA-256 digests.
 - `SHA256SUMS` — checksum list for verifying every release payload and the manifest.
 

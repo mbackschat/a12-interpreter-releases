@@ -1,0 +1,109 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../dm-interpreter/0.14.0/dm-interpreter-0.14.0.module",
+    "group": "io.github.mbackschat.a12.dm",
+    "module": "dm-interpreter",
+    "version": "0.14.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.0.0"
+    }
+  },
+  "variants": [
+    {
+      "name": "jvmApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "dm-interpreter-jvm-0.14.0.jar",
+          "url": "dm-interpreter-jvm-0.14.0.jar",
+          "size": 2066007,
+          "sha512": "e488a83861166f28ef15ff64c88ddbb4ea49c208af398ddf549f5b2f127b9c7ced1e7312dac10665dd980e7872529578eff09af76beb7eca3e6d53c760e30913",
+          "sha256": "5da82a9cc89f50156000f5040456b22728158b0cacba82109d724804b6b10642",
+          "sha1": "3658ebf05ede13533ff1c6445a1fc54dbcf11748",
+          "md5": "352497f672adedc1b9f0ef1bef426b79"
+        }
+      ]
+    },
+    {
+      "name": "jvmRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-serialization-json",
+          "version": {
+            "requires": "1.9.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "dm-interpreter-jvm-0.14.0.jar",
+          "url": "dm-interpreter-jvm-0.14.0.jar",
+          "size": 2066007,
+          "sha512": "e488a83861166f28ef15ff64c88ddbb4ea49c208af398ddf549f5b2f127b9c7ced1e7312dac10665dd980e7872529578eff09af76beb7eca3e6d53c760e30913",
+          "sha256": "5da82a9cc89f50156000f5040456b22728158b0cacba82109d724804b6b10642",
+          "sha1": "3658ebf05ede13533ff1c6445a1fc54dbcf11748",
+          "md5": "352497f672adedc1b9f0ef1bef426b79"
+        }
+      ]
+    },
+    {
+      "name": "jvmSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "files": [
+        {
+          "name": "dm-interpreter-jvm-0.14.0-sources.jar",
+          "url": "dm-interpreter-jvm-0.14.0-sources.jar",
+          "size": 628766,
+          "sha512": "4c3cb6f78bd707f740a337763ce59eb1e255585583fb180f7cad9fe9e35b97b5866fb2789ee272f7b06bca79f3ef43e2b84664e623031b8e00b5d3e612c00053",
+          "sha256": "7930a9aadaabea6f8fe2de3fedda1f1c50b56c113a0fd40ae392726c5ab84554",
+          "sha1": "119507870e26fe92355b7e8586af1ddf0b514be1",
+          "md5": "cb1456822c486c17ba9166a50b792f0c"
+        }
+      ]
+    }
+  ]
+}

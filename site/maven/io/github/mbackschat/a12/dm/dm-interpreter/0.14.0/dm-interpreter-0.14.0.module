@@ -1,0 +1,169 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "io.github.mbackschat.a12.dm",
+    "module": "dm-interpreter",
+    "version": "0.14.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "9.0.0"
+    }
+  },
+  "variants": [
+    {
+      "name": "metadataApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.4.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "dm-interpreter-metadata-0.14.0.jar",
+          "url": "dm-interpreter-0.14.0.jar",
+          "size": 179842,
+          "sha512": "5dde218fb2c5850f824fa3dda7ddf6663f06ecbda2bca30d9dd42a2fbaa34eaae242b5e8c8560f6f7f7359279dbd30fd8546165f638be66b04b13860a72945b6",
+          "sha256": "663ffed4e8c64becb8ef6ba4b43a461a3324dfef0fd8be5223d96a20bff9a7e4",
+          "sha1": "aa728c6db2cf94427506396d26f293d164d44e25",
+          "md5": "275239bc52e88a3acb840bd1845479f2"
+        }
+      ]
+    },
+    {
+      "name": "metadataSourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "files": [
+        {
+          "name": "dm-interpreter-kotlin-0.14.0-sources.jar",
+          "url": "dm-interpreter-0.14.0-sources.jar",
+          "size": 621904,
+          "sha512": "513b92c59af5a721f3cff9eaf88c505d483ff46cc44774080f595c2f8945070de695b7590381deb7ff05642bb003a982ea558df0533d36feab6ae32b4abbdefb",
+          "sha256": "c887e178adf0dcf88230ab2dcf86b369021d5b9a88541116c24d178abeb99b1a",
+          "sha1": "d673e99b3802caa11d0f6235fa467803bb74e95f",
+          "md5": "32cbaa6b577500e215a8aa229421e75e"
+        }
+      ]
+    },
+    {
+      "name": "jsApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.js.compiler": "ir",
+        "org.jetbrains.kotlin.platform.type": "js"
+      },
+      "available-at": {
+        "url": "../../dm-interpreter-js/0.14.0/dm-interpreter-js-0.14.0.module",
+        "group": "io.github.mbackschat.a12.dm",
+        "module": "dm-interpreter-js",
+        "version": "0.14.0"
+      }
+    },
+    {
+      "name": "jsRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.js.compiler": "ir",
+        "org.jetbrains.kotlin.platform.type": "js"
+      },
+      "available-at": {
+        "url": "../../dm-interpreter-js/0.14.0/dm-interpreter-js-0.14.0.module",
+        "group": "io.github.mbackschat.a12.dm",
+        "module": "dm-interpreter-js",
+        "version": "0.14.0"
+      }
+    },
+    {
+      "name": "jsSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.js.compiler": "ir",
+        "org.jetbrains.kotlin.platform.type": "js"
+      },
+      "available-at": {
+        "url": "../../dm-interpreter-js/0.14.0/dm-interpreter-js-0.14.0.module",
+        "group": "io.github.mbackschat.a12.dm",
+        "module": "dm-interpreter-js",
+        "version": "0.14.0"
+      }
+    },
+    {
+      "name": "jvmApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../dm-interpreter-jvm/0.14.0/dm-interpreter-jvm-0.14.0.module",
+        "group": "io.github.mbackschat.a12.dm",
+        "module": "dm-interpreter-jvm",
+        "version": "0.14.0"
+      }
+    },
+    {
+      "name": "jvmRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../dm-interpreter-jvm/0.14.0/dm-interpreter-jvm-0.14.0.module",
+        "group": "io.github.mbackschat.a12.dm",
+        "module": "dm-interpreter-jvm",
+        "version": "0.14.0"
+      }
+    },
+    {
+      "name": "jvmSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../dm-interpreter-jvm/0.14.0/dm-interpreter-jvm-0.14.0.module",
+        "group": "io.github.mbackschat.a12.dm",
+        "module": "dm-interpreter-jvm",
+        "version": "0.14.0"
+      }
+    }
+  ]
+}

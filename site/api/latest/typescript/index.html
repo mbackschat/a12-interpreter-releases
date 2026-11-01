@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>@mbackschat/a12-interpreter 0.13.0 TypeScript API</title>
+<title>@mbackschat/a12-interpreter 0.14.0 TypeScript API</title>
 <style>
 :root { color-scheme: light dark; font-family: system-ui, sans-serif; line-height: 1.5; }
 body { margin: 0 auto; max-width: 76rem; padding: 2rem; }
@@ -18,7 +18,7 @@ code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
 <body>
 <header>
 <h1>@mbackschat/a12-interpreter TypeScript API</h1>
-<p>Version 0.13.0. Generated from the declarations shipped in the release package.</p>
+<p>Version 0.14.0. Generated from the declarations shipped in the release package.</p>
 </header>
 <nav aria-label="Public declarations"><ul>
 <li><a href="#A12Document">A12Document</a></li>
@@ -118,8 +118,9 @@ export interface A12DocumentGroup {
 <p>A12's `PartiallyKnownDocumentMultiPointer` — the addressing type A12 puts on runtime **messages**, returned by
 all three of `IMessage`'s address accessors and handed to `ICustomCondition`.
 
-Its indexes admit {@link A12PartiallyKnownMultiPointer.WILDCARD} at any part and
-{@link A12PartiallyKnownMultiPointer.UNKNOWN} for a level that matched no row.
+Its indexes admit {@link A12PartiallyKnownMultiPointer.WILDCARD} at any part,
+{@link A12PartiallyKnownMultiPointer.UNKNOWN} for a level that matched no row, and
+{@link A12PartiallyKnownMultiPointer.PARALLEL_ITERATION}, which A12's runtime can leave on a parallel level.
 
 **There is no pointer string for this type.** A12 defines neither a parser nor a renderer for one, so this
 package publishes the owner's value and the owner's operations and nothing else.
@@ -132,8 +133,9 @@ interface itself.</p>
  * A12's `PartiallyKnownDocumentMultiPointer` — the addressing type A12 puts on runtime **messages**, returned by
  * all three of `IMessage`'s address accessors and handed to `ICustomCondition`.
  *
- * Its indexes admit {@link A12PartiallyKnownMultiPointer.WILDCARD} at any part and
- * {@link A12PartiallyKnownMultiPointer.UNKNOWN} for a level that matched no row.
+ * Its indexes admit {@link A12PartiallyKnownMultiPointer.WILDCARD} at any part,
+ * {@link A12PartiallyKnownMultiPointer.UNKNOWN} for a level that matched no row, and
+ * {@link A12PartiallyKnownMultiPointer.PARALLEL_ITERATION}, which A12's runtime can leave on a parallel level.
  *
  * **There is no pointer string for this type.** A12 defines neither a parser nor a renderer for one, so this
  * package publishes the owner's value and the owner's operations and nothing else.
@@ -152,13 +154,19 @@ A12PartiallyKnownMultiPointer: Readonly&lt;{
      * a level the engine could not resolve to a row, which a parallel iteration can leave at any joined level.
      */
     UNKNOWN: number;
+    /**
+     * `IIdentifier.PARALLEL_ITERATION` — a level repeated in parallel across joined groups. A12 says return values
+     * should usually not contain it, yet it reaches the references of a rule reporting on a keyed group inside a
+     * group joined on another key.
+     */
+    PARALLEL_ITERATION: number;
     /** `PartiallyKnownDocumentMultiPointer.of(fullName, repetitions)` — the one construction path. */
     of(fullName: string, repetitionIndexes: readonly number[]): A12PartiallyKnownMultiPointer;
     /**
      * `toDocumentPointer()` — the exact pointer when this message pointer is one, else `null`.
      *
-     * `null` is a legitimate answer, not a failure: a wildcard above the last part, or an unknown index anywhere,
-     * names a set or an unresolved level rather than one cell. The **root** raises instead of answering, which is
+     * `null` is a legitimate answer, not a failure: a wildcard above the last part, or a negative index (unknown
+     * or parallel iteration) anywhere, names a set or an unresolved level rather than one cell. The **root** raises instead of answering, which is
      * A12's own measured behaviour for that edge rather than a choice made here.
      */
     toExactPointer(pointer: A12PartiallyKnownMultiPointer): A12Pointer | null;
@@ -486,11 +494,16 @@ export declare class Interpreter {
 </section>
 <section id="InterpreterConfiguration">
 <h2>InterpreterConfiguration</h2>
-<p>Named project callbacks bound while creating an interpreter.</p>
-<pre><code>/** Named project callbacks bound while creating an interpreter. */
+<p>Named project callbacks bound while creating an interpreter, and the instant it evaluates at.</p>
+<pre><code>/** Named project callbacks bound while creating an interpreter, and the instant it evaluates at. */
 export interface InterpreterConfiguration {
     readonly customFieldTypes?: Readonly&lt;Record&lt;string, CustomFieldValidator&gt;&gt;;
     readonly customConditions?: Readonly&lt;Record&lt;string, CustomCondition&gt;&gt;;
+    /**
+     * The instant `Today` and `Now` read, as A12's `currentDateForTest`, read as wall time in the model's zone.
+     * Omitted, every validation or computation call reads the current instant.
+     */
+    readonly evaluationInstant?: Date;
 }</code></pre>
 </section>
 <section id="InterpreterIntegrationError">

@@ -43,7 +43,7 @@
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
         <div class="library-version" id="library-version">
-0.13.0        </div>
+0.14.0        </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
                 <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true"
@@ -107,7 +107,7 @@
   <div class="breadcrumbs"><a href="../../../../index.html">dm-interpreter</a><span class="delimiter">/</span><a href="../../index.html">io.github.mbackschat.a12.dm.interpreter</a><span class="delimiter">/</span><a href="../index.html">DocumentInputReasonCode</a><span class="delimiter">/</span><span class="current">MALFORMED_JSON</span></div>
   <div class="cover ">
     <h1 class="cover"><span>MALFORMED_</span><wbr></wbr><span>JSON</span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><div class="block"><a href="index.html">MALFORMED_JSON</a></div></div><p class="paragraph">The input is not parseable JSON, or its root is not the document's root object.</p></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":interpreter/commonMain"><div class="symbol monospace"><div class="block"><a href="index.html">MALFORMED_JSON</a></div></div><p class="paragraph">The input is not parseable JSON, its root is not the document's root object, or it carries an unquoted number whose scale has no 32-bit form, which A12's reader cannot read wherever it stands.</p></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
@@ -158,7 +158,7 @@
                     <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
                         Dokka
                     </a>
-                    <div>A12 Interpreter 0.13.0 · MIT License</div>
+                    <div>A12 Interpreter 0.14.0 · MIT License</div>
                 </div>
             </div>
         </div>

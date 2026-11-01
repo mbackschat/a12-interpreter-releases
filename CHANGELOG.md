@@ -4,6 +4,50 @@ This changelog covers the independently consumable interpreter packages, API doc
 
 **Headline topics only.** An entry names the capabilities and breaking changes a consumer would notice, not every fix behind them; the [main project's](https://github.com/mbackschat/a12-dmkits) git history and findings docs are the complete record.
 
+## [0.14.0]
+
+### Added
+
+- **`Today` and `Now` evaluate through the published API.** `InterpreterConfiguration` takes an optional evaluation instant (`evaluationInstant`, a `Date` in TypeScript), read in the model's time zone; without one, each call reads the current instant, as the Kernel does. In TypeScript a `Date` from another realm is accepted. Rules using either constant used to be reported unsupported.
+- **Rules and computations that join repeatable groups by their index field now evaluate starred aggregates, filters and keyed reads** instead of reporting them unsupported. As in the Kernel, each ranges over the rows under the joined groups' common parent, whichever rows the join paired. A starred read below one of the joined groups reads that group's joined row, empty where the group has no row for the key, and joins the group even when nothing else reads it, a rule reading every group only through starred reads included.
+- **`A12PartiallyKnownMultiPointer` holds A12's parallel-iteration index `-6`**, named `PARALLEL_ITERATION` on JVM, JavaScript and TypeScript. A12 can leave it on a message's references, as on a rule reporting on a keyed group inside a group joined on another key, so a message pointer read from A12 carrying it was refused.
+
+### Changed
+
+- **A Number written with an exponent is charged against the raw-value ceilings at the length A12 stores it**, its plain form, so `"1e1000000"` exceeds the default million-unit per-field ceiling and the Document is refused with `RESOURCE_LIMIT_EXCEEDED`. Such a value used to be kept as unconvertible text past 16 million places and expanded below that, uncounted.
+
+### Fixed
+
+- **`FirstFilledValue` over a group or a keyed group's row stops at an empty required field**, which A12 leaves undecided, as it already did over a field; it read past the field and took a later value.
+- **A `$` correlation no longer keeps a row on a required field's empty join value**, which A12 leaves undecided: an empty outer key matched it and an ordered comparison ranked it below every value. Such a scope also keeps its indexed evaluation, re-reading only the rows that hold the empty cell, where one empty cell used to make the whole scope quadratic.
+- **A Number's exponent is read to A12's bound**: a zero at any scale A12 holds, such as `"0e2147483648"`, is `0`, and an unquoted number whose scale has no 32-bit form refuses the Document as `MALFORMED_JSON` wherever it stands, as A12 cannot read it. The first was reported as invalid characters and the second was accepted.
+- **A joined rule's unstarred fill quantifiers and group first-filled reads now evaluate**, reading the key's own rows, empty for a side without one, as in the Kernel; they were reported unsupported.
+- **A computation reading a computed date, range or Number now computes under a model charset that excludes its characters**, as in the Kernel, which checks a computed value only against its field's format; it used to clear.
+- **A model `boolean` member A12 cannot bind now refuses the model**, as A12 refuses it: `"yes"`, `1.5` or `{}` on `positivesOnly`, `global` or any other boolean used to load as unset.
+- **An index field whose enumeration `sValue` is padded or blank now evaluates**, staged as written like the Kernel stages it; the model was declined as unsupported.
+- **`Today` and `Now` read their day, month and year as A12 does before 1582-10-15**, on the Julian side of its calendar; a pinned instant that early answered with the proleptic Gregorian date.
+- **The JVM and JavaScript packages classify every character alike.** A quoted Number's non-ASCII digits are read as A12's JVM runtime reads them on both, and conditions and message tokens keep A12's ASCII digits, names and whitespace, so a no-break space inside `$…$` no longer renders a token in JavaScript alone.
+- **`RepetitionNotUnique` keys in sibling fixed groups of one repeatable row now evaluate**, compared per that row in either key order, as in the Kernel; the model was refused as unsupported.
+- **A computation copying an empty Confirm field now leaves its Confirm target empty**, as the Kernel does; it used to store `false` there and report the target erroneous.
+- **A rule condition that opens with the scale-gate waiver now loads and evaluates**, in the model's condition language (`@SuppressWarning(MVK_INVALID_COMPARE_DEC_PLACES)` or `@UnterdrueckeWarnung(…)`); the model was refused at its first waived rule. The waived comparison is evaluated exactly, as in the Kernel.
+- **A required field's own message renders every token the Kernel substitutes**: `$field$`, `$Feld$`, and the empty `$<fieldName>.Value$`, `$field.value$` and `$Feld.Wert$`, in either condition language. A value token used to make the document unsupported.
+- Keyed group row numbers and index value/category tokens now render in rule messages, including an unmatched parallel row’s joined key.
+- **Model `boolean` members are read as the Kernel binds them**: a padded `" true"` or `" TRUE"` and the integer `1` set `fieldRefByShortNameAllowed`, `Field.global` and every field type's flag (line breaks, value validation, zero, sign, leading zeros, the 1900 check), and a blank or `"null"` text reads as off.
+- **A dated literal compared with `FirstFilledValue` of dates is read as a date**, as beside a date field or `MinValue`; it was compared as text, so `FirstFilledValue(RevisedBy, PromisedBy) < "01.01.2026"` answered wrongly whenever the text order and the date order disagreed.
+
+- **A `DateRange(start, finish)` construction now equals the stored range it was built to match**, wherever the declared profile omits the day (`MM`, `yyyy`, `yyyy-MM`). Both endpoints were completed to the earliest date they denote; the Kernel completes the START to the earliest and the FINISH to the latest, exactly as it does for a stored range.
+- **A stored date range that visibly carries its separator is no longer reported as missing one.** An extra separator or an empty endpoint is a format error, which is what the Kernel reports; only a value that does not contain the separator at all is the missing-separator error.
+- The two date-range formal messages were reworded to match the narrowed classification: the missing-separator one no longer says "or misplaced", and the format one now says the value is not a pair of two valid dates.
+- **A month-pair range declared with an empty separator is read as two months.** That declaration (`MM` with no separator, the one the Kernel admits) halves the stored value; it was previously split per character and every value reported malformed.
+
+### Performance
+
+- A filtered starred read over nested rows, where one row holds far more children than the others, no longer holds a placeholder for every child slot of every row in memory, and skips the empty slots instead of visiting each.
+- A model with many sibling groups no longer rescans the whole Document once per group on its first validation, so that first validation's cost and memory grow linearly with the groups.
+- Partial validation over a relevant set that names every row now decides each row's relevance by index, so its cost grows linearly with the rows rather than with their square.
+- A per-row rule that counts filled fields or groups across a starred column, or asks a fill quantifier over one, now reads the column once per scope instead of once per row, so its cost grows linearly with the rows rather than with their square.
+- **Fast, and measured — never assumed.** On the fixed Apple M1/Chrome runner on 2026-08-17, a 200-row Document validated in a **11.55 ms median** and the 10,000-row stress Document with 4,900 findings in a **166.1 ms median**. Against the A12 Kernel's generated validator compiled as Java, with code generation outside the clock, the interpreter led by **2.8×–17.1×** across the default inventory and **12.2×–16.8×** on repeated-document evaluation, with the closest hostile point still ahead by 1.73×. These are bounded same-machine measurements after exact result preflight, not universal promises; see [the benchmark method and complete tables](https://github.com/mbackschat/a12-dmkits/blob/main/docs/INTERPRETER-PERFORMANCE.md).
+
 ## [0.13.0]
 
 ### Added

@@ -1,6 +1,6 @@
 {
   "index.html": {
-    "file": "assets/index-DI4BO1Fd.js",
+    "file": "assets/index-vMLxefqS.js",
     "name": "index",
     "src": "index.html",
     "isEntry": true,
@@ -14,7 +14,7 @@
     ]
   },
   "src/performance.ts": {
-    "file": "assets/performance-CsZvBF4G.js",
+    "file": "assets/performance-DMjgnQlI.js",
     "name": "performance",
     "src": "src/performance.ts",
     "isDynamicEntry": true,
@@ -23,7 +23,7 @@
     ]
   },
   "src/qualification.ts": {
-    "file": "assets/qualification-DGmuFs88.js",
+    "file": "assets/qualification-lxG41nnM.js",
     "name": "qualification",
     "src": "src/qualification.ts",
     "isDynamicEntry": true,
@@ -32,7 +32,7 @@
     ]
   },
   "src/showcase.ts": {
-    "file": "assets/showcase-JSh7mPjR.js",
+    "file": "assets/showcase-DqlIGa4j.js",
     "name": "showcase",
     "src": "src/showcase.ts",
     "isDynamicEntry": true,

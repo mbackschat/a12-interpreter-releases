@@ -27,7 +27,7 @@ permissions:
 
 jobs:
   build-release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 45
     env:
       GRADLE_USER_HOME: ${{ github.workspace }}/.gradle-isolated
@@ -58,7 +58,7 @@ jobs:
         uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: 21
+          java-version: 21.0.12
 
       - name: Set up Gradle cache
         uses: gradle/actions/setup-gradle@v6
@@ -66,7 +66,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 24
+          node-version: '24.20.0'
 
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
@@ -100,6 +100,7 @@ jobs:
             --api-docs-archive "$GITHUB_WORKSPACE/source/build/interpreter-release/api-docs/dm-interpreter-${{ inputs.artifact_version }}-api-docs.zip" \
             --showcase "$GITHUB_WORKSPACE/source/build/interpreter-release/consumer/browser/dist" \
             --readme "$GITHUB_WORKSPACE/source/interpreter/public-release/README.md" \
+            --performance "$GITHUB_WORKSPACE/source/interpreter/public-release/PERFORMANCE.md" \
             --changelog "$GITHUB_WORKSPACE/source/interpreter/CHANGELOG.md" \
             --license "$GITHUB_WORKSPACE/source/LICENSE" \
             --disclaimer "$GITHUB_WORKSPACE/source/interpreter/public-release/DISCLAIMER.md" \

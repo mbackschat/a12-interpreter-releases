@@ -1,4 +1,4 @@
-# A12 Interpreter API 0.14.0
+# A12 Interpreter API 0.16.0
 
 > Public signatures and examples for the version-matched interpreter release.
 
@@ -150,7 +150,7 @@ const errorCellExact = A12PartiallyKnownMultiPointer.toExactPointer(errorCell);
 
 Both are published on Kotlin/JVM and Kotlin/JS with the same members. On Kotlin the exact pointer carries A12's own state — `pathParts` (a list of `A12PathPart`) with `fullName` and `repetitionIndexes` derived — and both value types are built through a validating factory rather than a constructor, so no JVM caller can side-step the checks. In TypeScript the two are **nominally** distinct: each carries a compile-time brand, so neither is assignable where the other is required — including a pointer that arrives through a finding.
 
-**These are the message-channel types.** A `ValidationFinding` types `errorPath` as `A12PartiallyKnownMultiPointer` and `referenced`/`fillToFix` as lists of it, matching what `IMessage` returns on all three accessors. The engine retains the pointer, so nothing has to be recovered from text — which matters because the interpreter's house rendering omits the terminal repetition, and A12's message sentinels (the wildcard `0` and the unknown `-5`) sit exactly where it is dropped. A third, the parallel-iteration index `-6`, can appear above it, as on the references of a rule reporting on a keyed group inside a group joined on another key. Every published pointer and repetition list is frozen.
+**These are the message-channel types.** A `ValidationFinding` types `errorPath` as `A12PartiallyKnownMultiPointer` and `referenced`/`fillToFix` as lists of it, matching what `IMessage` returns on all three accessors. The engine retains the pointer, so nothing has to be recovered from text — which matters because the interpreter's house rendering omits the terminal repetition, and A12's message sentinels (the wildcard `0` and the unknown `-5`) sit exactly where it is dropped. A third, the parallel-iteration index `-6`, can appear above it, as on the references of a rule reporting on a keyed group inside a group joined on another key. `possiblyCausing` groups the same pointers as A12's `getGroupsOfPossiblyCausingEntities()` does: for an omission, the entities whose absence may cause it and then the given ones; for a value finding, one group. Every published pointer, group and repetition list is frozen.
 
 Rendering is the consumer's call. `A12PartiallyKnownMultiPointer.toExactPointer` gives A12's exact pointer when the address names one cell and `null` when it does not, and `A12PointerFormat` turns that into A12's canonical string. There is deliberately no string form for a non-exact address: A12 defines none, and inventing one would publish a spelling A12 cannot read back.
 
@@ -475,11 +475,11 @@ The base artifacts are clean-room, kernel-free, and MIT-licensed. They do not li
 
 The supported model time zones are `UTC`, `GMT`, and `Europe/Berlin`. All four A12 Date precisions are supported. The support report and each evaluation report make program-level unsupported constructs visible.
 
-The versioned Kotlin and TypeScript references contain the complete published declaration inventory. Deferred compatibility adapters and richer stateful products are not part of the v0.14.0 public artifacts.
+The versioned Kotlin and TypeScript references contain the complete published declaration inventory. Deferred compatibility adapters and richer stateful products are not part of the v0.16.0 public artifacts.
 
 ## 10. Generated references
 
-The version-matched API documentation asset `dm-interpreter-0.14.0-api-docs.zip` contains this tested guide, a Dokka Kotlin reference, a TypeScript reference generated from the declaration file inside the packed npm tarball, and `llms.txt`. Its immutable release layout starts at `api/v0.14.0/`; the public mirror adds `api/latest/` only after that release has passed the complete gate.
+The version-matched API documentation asset `dm-interpreter-0.16.0-api-docs.zip` contains this tested guide, a Dokka Kotlin reference, a TypeScript reference generated from the declaration file inside the packed npm tarball, and `llms.txt`. Its immutable release layout starts at `api/v0.16.0/`; the public mirror adds `api/latest/` only after that release has passed the complete gate.
 
 ## TypeScript public ABI
 
@@ -502,6 +502,7 @@ export interface A12PartiallyKnownMultiPointer {
     readonly [A12_PARTIALLY_KNOWN_POINTER]: true;
     readonly fullName: string;
     readonly repetitionIndexes: readonly number[];
+    readonly semanticIndexValueForUnknownIndexGroup?: string | number | Date;
 }
 A12PartiallyKnownMultiPointer: Readonly<{
     WILDCARD: number;
@@ -736,7 +737,6 @@ export interface ModelDependency {
     readonly fromModelId: string;
     readonly toModelId: string;
     readonly purpose: "include" | "type-definitions";
-    readonly alias?: string;
     readonly diagnosticLabel?: string;
     readonly sha256: string;
 }
@@ -808,7 +808,6 @@ export interface ModelReferenceStep {
     readonly fromModelId: string;
     readonly toModelId: string;
     readonly purpose: "include" | "type-definitions";
-    readonly alias?: string;
 }
 
 ## ModelSourceLoadContext
@@ -912,6 +911,7 @@ export interface ValidationFinding {
     readonly text: string;
     readonly referenced: readonly A12PartiallyKnownMultiPointer[];
     readonly fillToFix: readonly A12PartiallyKnownMultiPointer[];
+    readonly possiblyCausing: readonly (readonly A12PartiallyKnownMultiPointer[])[];
 }
 
 ## ValidationFindingType

@@ -4,6 +4,29 @@ This changelog covers the independently consumable interpreter packages, API doc
 
 **Headline topics only.** An entry names the capabilities and breaking changes a consumer would notice, not every fix behind them; the [main project's](https://github.com/mbackschat/a12-dmkits) git history and findings docs are the complete record.
 
+## [0.16.0]
+
+### Changed
+
+- **BREAKING: evaluates as A12 Kernel `31.1.1` does, on the DM `29.4.0` model format.** A mount is written as `includeConfig` and identified by its `reference` alone. A group still carrying a DM 28 mount member such as `modelAlias` is refused, because A12 would read it as a plain group and lose the mount silently. A mount's local elements are replaced by the included content, as A12 prepares them.
+- **Dates follow kernel 31.1.1's runtime:** the proleptic calendar, Europe/Berlin's historical offsets, a daylight-saving gap moved forward and an overlap read at its earlier offset, and `DifferenceInDays` counted on wall clocks.
+- **BREAKING: a finding names its possibly-causing entities.** `ValidationFinding.possiblyCausing` groups them as A12's `getGroupsOfPossiblyCausingEntities()` does: an omission's entities whose absence may cause it, then the given ones. A rule's possible-cause filter decides which entities are named. A `ValidationFinding` built by hand, or a TypeScript object typed as one, now needs the groups.
+
+### Added
+
+- **`SumOfTerms` evaluates,** including counts and aggregates inside a term, read as A12 reads them.
+- **A possibly-causing entity at a row no key selected or joined carries that key** as `semanticIndexValueForUnknownIndexGroup`, as A12's pointer does: the text of a text, enumeration or custom-typed key; for a number key a `BigDecimal` on the JVM and a number in JavaScript and TypeScript; for a date, time or date-time key a `Date` at the instant the key names in the model's time zone. Two keys that miss one row are two entities. The browser showcase shows the key beside each such address.
+
+### Fixed
+
+- **A partial `NumberOfFilledGroups` over a group with an empty fixed sub-group stays undecided,** as on kernel 31.1.1, which asks every declared sub-group to be covered.
+
+### Performance
+
+- **Partial validation shares gated group counts across a scope,** and a row-invariant `SumOfTerms` is folded once per scope.
+- **The JavaScript and TypeScript packages publish a duplicate cluster's shared pointers once,** so all findings share them, as on the JVM. They used to be copied per finding, which exhausted a 4 GB heap at 4,000 duplicate rows.
+- **Fast, and measured — never assumed.** On the fixed Apple M1/Chrome runner on 2026-08-17, a 200-row Document validated in a **11.55 ms median** and the 10,000-row stress Document with 4,900 findings in a **166.1 ms median**. Against the A12 Kernel `30.8.1` generated validator compiled as Java, with code generation outside the clock, the interpreter led by **2.8×–17.1×** across the default inventory and **12.2×–16.8×** on repeated-document evaluation, with the closest hostile point still ahead by 1.73×. These are bounded same-machine measurements after exact result preflight, not universal promises; see [the benchmark method and complete tables](https://github.com/mbackschat/a12-dmkits/blob/main/docs/INTERPRETER-PERFORMANCE.md).
+
 ## [0.14.0]
 
 ### Added

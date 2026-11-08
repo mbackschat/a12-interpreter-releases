@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>@mbackschat/a12-interpreter 0.14.0 TypeScript API</title>
+<title>@mbackschat/a12-interpreter 0.16.0 TypeScript API</title>
 <style>
 :root { color-scheme: light dark; font-family: system-ui, sans-serif; line-height: 1.5; }
 body { margin: 0 auto; max-width: 76rem; padding: 2rem; }
@@ -18,7 +18,7 @@ code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
 <body>
 <header>
 <h1>@mbackschat/a12-interpreter TypeScript API</h1>
-<p>Version 0.14.0. Generated from the declarations shipped in the release package.</p>
+<p>Version 0.16.0. Generated from the declarations shipped in the release package.</p>
 </header>
 <nav aria-label="Public declarations"><ul>
 <li><a href="#A12Document">A12Document</a></li>
@@ -145,6 +145,15 @@ export interface A12PartiallyKnownMultiPointer {
     /** `fullName()` — each name with a leading slash, so the root pointer is `&quot;/&quot;`. */
     readonly fullName: string;
     readonly repetitionIndexes: readonly number[];
+    /**
+     * `semanticIndexValueForUnknownIndexGroup()` — on a possibly-causing entity at the
+     * {@link A12PartiallyKnownMultiPointer.UNKNOWN} row, the key its semantic index found no row for, as A12's own
+     * TypeScript runtime types it: the text of a text, enumeration or custom-typed key, a number for a number key,
+     * and for a date key a `Date` at midnight of that date in the model's time zone. Absent on every other pointer.
+     * Each missed key is its own entity, and a number key is told apart by its text, so `7` and `7.0` are two
+     * entities that both read `7` here.
+     */
+    readonly semanticIndexValueForUnknownIndexGroup?: string | number | Date;
 }
 A12PartiallyKnownMultiPointer: Readonly&lt;{
     /** `DocumentMultiPointer.WILDCARD` — all repetitions of a level. Legal at **every** part on this type. */
@@ -549,7 +558,6 @@ export interface ModelDependency {
     readonly fromModelId: string;
     readonly toModelId: string;
     readonly purpose: &quot;include&quot; | &quot;type-definitions&quot;;
-    readonly alias?: string;
     readonly diagnosticLabel?: string;
     readonly sha256: string;
 }</code></pre>
@@ -644,7 +652,6 @@ export interface ModelReferenceStep {
     readonly fromModelId: string;
     readonly toModelId: string;
     readonly purpose: &quot;include&quot; | &quot;type-definitions&quot;;
-    readonly alias?: string;
 }</code></pre>
 </section>
 <section id="ModelSourceLoadContext">
@@ -824,21 +831,33 @@ export type UnsupportedProgramSubject = &quot;element&quot; | &quot;cell&quot;;<
 <h2>ValidationFinding</h2>
 <p>Detached projection of one firing validation rule.
 
-Its three addresses are A12's message pointer — `IMessage` types `getErrorFieldPointer()`,
-`getReferencedFieldsPointers()` and `getRefOmissionErrorResponsiblePointers()` as
-`PartiallyKnownDocumentMultiPointer`, and so does this. They arrive branded, so a finding's address is
+Its addresses are A12's message pointer — `IMessage` types `getErrorFieldPointer()`,
+`getReferencedFieldsPointers()`, `getRefOmissionErrorResponsiblePointers()` and the members of
+`getGroupsOfPossiblyCausingEntities()` as `PartiallyKnownDocumentMultiPointer`, and so does this. They arrive branded, so a finding's address is
 accepted wherever an {@link A12PartiallyKnownMultiPointer} is required and rejected where an
 {@link A12Pointer } is. Use {@link A12PartiallyKnownMultiPointer.toExactPointer} for the exact pointer when
-the address names one cell; it answers `null` when it does not.</p>
+the address names one cell; it answers `null` when it does not.
+
+`possiblyCausing` is `IMessage.getGroupsOfPossiblyCausingEntities()`, each pointer set as an array: an omission
+has two groups, the entities whose absence may cause it and then the given ones; a value finding has one. A
+formal check names only its own cell, and an evaluation fault has one empty group. Order within a
+group carries no meaning. Where two keys select no row of the same group, A12 names that entity once per key,
+but this pointer has no member for the key, so the interpreter names it once.</p>
 <pre><code>/**
  * Detached projection of one firing validation rule.
  *
- * Its three addresses are A12's message pointer — `IMessage` types `getErrorFieldPointer()`,
- * `getReferencedFieldsPointers()` and `getRefOmissionErrorResponsiblePointers()` as
- * `PartiallyKnownDocumentMultiPointer`, and so does this. They arrive branded, so a finding's address is
+ * Its addresses are A12's message pointer — `IMessage` types `getErrorFieldPointer()`,
+ * `getReferencedFieldsPointers()`, `getRefOmissionErrorResponsiblePointers()` and the members of
+ * `getGroupsOfPossiblyCausingEntities()` as `PartiallyKnownDocumentMultiPointer`, and so does this. They arrive branded, so a finding's address is
  * accepted wherever an {@link A12PartiallyKnownMultiPointer} is required and rejected where an
  * {@link A12Pointer} is. Use {@link A12PartiallyKnownMultiPointer.toExactPointer} for the exact pointer when
  * the address names one cell; it answers `null` when it does not.
+ *
+ * `possiblyCausing` is `IMessage.getGroupsOfPossiblyCausingEntities()`, each pointer set as an array: an omission
+ * has two groups, the entities whose absence may cause it and then the given ones; a value finding has one. A
+ * formal check names only its own cell, and an evaluation fault has one empty group. Order within a
+ * group carries no meaning. Where two keys select no row of the same group, A12 names that entity once per key,
+ * but this pointer has no member for the key, so the interpreter names it once.
  */
 export interface ValidationFinding {
     readonly code: string;
@@ -849,6 +868,7 @@ export interface ValidationFinding {
     readonly text: string;
     readonly referenced: readonly A12PartiallyKnownMultiPointer[];
     readonly fillToFix: readonly A12PartiallyKnownMultiPointer[];
+    readonly possiblyCausing: readonly (readonly A12PartiallyKnownMultiPointer[])[];
 }</code></pre>
 </section>
 <section id="ValidationFindingType">

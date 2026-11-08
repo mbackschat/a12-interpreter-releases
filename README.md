@@ -13,7 +13,7 @@ Use the built-in models and Documents or load your own local workspace. Your sel
 ## Documentation
 
 - 🚀 **[Try the live browser showcase →](https://mbackschat.github.io/a12-interpreter-releases/showcase/)**
-- 📘 **[Read the developer API guide →](https://github.com/mbackschat/a12-interpreter-releases/blob/v0.14.0/site/api/v0.14.0/INTERPRETER-API-GUIDE.md)**
+- 📘 **[Read the developer API guide →](https://github.com/mbackschat/a12-interpreter-releases/blob/v0.16.0/site/api/v0.16.0/INTERPRETER-API-GUIDE.md)**
 - 🧭 **[Browse the TypeScript API →](https://mbackschat.github.io/a12-interpreter-releases/api/latest/typescript/)**
 - 🧭 **[Browse the Kotlin API →](https://mbackschat.github.io/a12-interpreter-releases/api/latest/kotlin/)**
 - 🏠 **[Open the public release site →](https://mbackschat.github.io/a12-interpreter-releases/)** — current version, installation coordinates, showcase, API references, and privacy information
@@ -34,7 +34,7 @@ Use the built-in models and Documents or load your own local workspace. Your sel
 
 The package does not author models, render forms, persist Documents, provide a virtual filesystem, or bundle Kernel code. Kernel-shaped TypeScript and JVM drop-in adapters are separate, later compatibility products.
 
-**Semantics target.** This release reproduces the evaluation behavior of **A12 Kernel 30.8.1**, as shipped in the **A12 Tools 2025.06-ext5** distribution. The implementation is clean-room and is verified by differential testing against that kernel; the target version is stated so you can tell which kernel's semantics a given release was matched to.
+**Semantics target.** This release reproduces the evaluation behavior of **A12 Kernel 31.3.1**, as shipped in the **A12 Tools 2026.06-ext2** distribution. The implementation is clean-room and is verified by differential testing against that kernel; the target version is stated so you can tell which kernel's semantics a given release was matched to.
 
 <p align="center">
   <a href="assets/infographics/a12-interpreter-runtime.avif">
@@ -70,7 +70,7 @@ Kotlin Multiplatform lets this one evaluation engine serve JVM, Node.js, browser
 Install the npm-compatible tarball directly from the GitHub Release:
 
 ```sh
-pnpm add https://github.com/mbackschat/a12-interpreter-releases/releases/download/v0.14.0/a12-interpreter-0.14.0.tgz
+pnpm add https://github.com/mbackschat/a12-interpreter-releases/releases/download/v0.16.0/a12-interpreter-0.16.0.tgz
 ```
 
 Documents are A12's own Document JSON — the shape the A12 Kernel serializes: a nested object tree, a repeating group as an array whose index is the repetition, native JSON for numbers and booleans.
@@ -130,7 +130,7 @@ repositories {
 }
 
 dependencies {
-    implementation("io.github.mbackschat.a12.dm:dm-interpreter:0.14.0")
+    implementation("io.github.mbackschat.a12.dm:dm-interpreter:0.16.0")
 }
 ```
 
@@ -205,7 +205,7 @@ Four things to know before sizing a cache:
   and no serialization, so only the expanded DM-JSON can live in a shared tier.
 
 The complete pattern — cache keying, single-flight loading, eviction safety, and the trade-offs — is in
-[the developer API guide](https://github.com/mbackschat/a12-interpreter-releases/blob/v0.14.0/site/api/v0.14.0/INTERPRETER-API-GUIDE.md).
+[the developer API guide](https://github.com/mbackschat/a12-interpreter-releases/blob/v0.16.0/site/api/v0.16.0/INTERPRETER-API-GUIDE.md).
 
 ## Compatibility and limits
 
@@ -226,9 +226,9 @@ Product implementation and examples.
 |---|---:|---:|---:|---:|---:|
 | CSS | 1 | 886 | 749 | 3 | 134 |
 | HTML | 1 | 333 | 321 | 0 | 12 |
-| Kotlin | 144 | 35631 | 22582 | 10041 | 3008 |
-| TypeScript | 17 | 3794 | 3227 | 286 | 281 |
-| **Total** | **163** | **40644** | **26879** | **10330** | **3435** |
+| Kotlin | 157 | 36559 | 23045 | 10391 | 3123 |
+| TypeScript | 18 | 3840 | 3252 | 306 | 282 |
+| **Total** | **177** | **41618** | **27367** | **10700** | **3551** |
 
 ### Verification
 
@@ -238,9 +238,9 @@ Automated tests, laws, differentials, consumer checks, and their support code.
 |---|---:|---:|---:|---:|---:|
 | Java | 2 | 166 | 145 | 2 | 19 |
 | JavaScript | 2 | 154 | 137 | 0 | 17 |
-| Kotlin | 346 | 38009 | 29880 | 4025 | 4104 |
-| TypeScript | 15 | 3399 | 3178 | 75 | 146 |
-| **Total** | **365** | **41728** | **33340** | **4102** | **4286** |
+| Kotlin | 355 | 38803 | 30423 | 4186 | 4194 |
+| TypeScript | 19 | 3506 | 3267 | 87 | 152 |
+| **Total** | **378** | **42629** | **33972** | **4275** | **4382** |
 
 Maintainers regenerate these tables with the latest locmetry; release publishers compare them with fresh counts before any public mutation.
 <!-- source-statistics:interpreter-release:end -->
@@ -249,10 +249,10 @@ Maintainers regenerate these tables with the latest locmetry; release publishers
 
 This release contains:
 
-- `a12-interpreter-0.14.0.tgz` — npm-compatible TypeScript/JavaScript package with the compiled browser/Node runtime, declarations, source maps, README, and license.
-- `dm-interpreter-0.14.0-maven-repository.zip` — complete offline Maven repository containing the Kotlin Multiplatform, JVM, and JS artifacts, Gradle metadata, POMs, documentation JARs, source JARs, and checksums.
-- `dm-interpreter-0.14.0-api-docs.zip` — versioned developer guide plus generated TypeScript and Kotlin API references for offline use or static hosting.
-- `dm-interpreter-0.14.0-showcase.zip` — deployable static browser showcase, including its built-in example workspaces, Documents, conformance data, and measured bundle metadata.
+- `a12-interpreter-0.16.0.tgz` — npm-compatible TypeScript/JavaScript package with the compiled browser/Node runtime, declarations, source maps, README, and license.
+- `dm-interpreter-0.16.0-maven-repository.zip` — complete offline Maven repository containing the Kotlin Multiplatform, JVM, and JS artifacts, Gradle metadata, POMs, documentation JARs, source JARs, and checksums.
+- `dm-interpreter-0.16.0-api-docs.zip` — versioned developer guide plus generated TypeScript and Kotlin API references for offline use or static hosting.
+- `dm-interpreter-0.16.0-showcase.zip` — deployable static browser showcase, including its built-in example workspaces, Documents, conformance data, and measured bundle metadata.
 - `release-manifest.json` — machine-readable release identity, source tag and commit, package coordinates, supported targets, artifact sizes, and SHA-256 digests.
 - `SHA256SUMS` — checksum list for verifying every release payload and the manifest.
 
